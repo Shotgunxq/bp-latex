@@ -125,10 +125,10 @@ CORS (Cross-Origin Resource Sharing) predstavuje mechanizmus, ktorý umožňuje 
  Ide o spôsob, ako prehliadače môžu bezpečne vykonávať požiadavky na zdroje umiestnené na iných serveroch, než odkiaľ pochádza pôvodná webová stránka. 
  V minulosti takéto požiadavky bránila politika rovnakého pôvodu (same-origin policy), ktorá obmedzovala skripty bežiace v prehliadači výhradne na komunikáciu so serverom tej istej domény.
 
-Mechanizmus CORS funguje tak, že server explicitne definuje, kto môže vytvárať požiadavky na jeho API, aké typy požiadaviek sú povolené a aké HTTP metódy sú podporované.
+Mechanizmus CORS funguje tak, že server explicitne definuje, kto môže vytvárať požiadavky na jeho \acrshort{api} \footnote{API (Application Programming Interface) je rozhranie, ktoré umožňuje komunikáciu a výmenu dát medzi rôznymi softvérovými aplikáciami alebo systémami.}
+, aké typy požiadaviek sú povolené a aké HTTP metódy sú podporované.
  Toto sa realizuje prostredníctvom špeciálnych HTTP hlavičiek, ktoré umožňujú prehliadaču určiť, či konkrétna požiadavka medzi rôznymi doménami môže byť bezpečne vykonaná.
  \cite{CORS}
- \footnote{API (Application Programming Interface) je rozhranie, ktoré umožňuje komunikáciu a výmenu dát medzi rôznymi softvérovými aplikáciami alebo systémami.}
 \subsubsection{Node.js}
 Node.js je runtime prostredie umožňujúce použitie JavaScriptu na strane servera, pričom využíva flexibilitu a jednoduchosť tohto programovacieho jazyka.
  Výhodou JavaScriptu sú jeho pokročilé koncepty ako „first-class functions“ (funkcie prvej triedy) a closures, ktoré umožňujú vytváranie efektívnych webových aplikácií. 
@@ -136,6 +136,10 @@ Node.js je runtime prostredie umožňujúce použitie JavaScriptu na strane serv
  Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie. \cite{nodejs}
  \footnote{Runtime prostredie je prostredie poskytujúce aplikácii všetky potrebné zdroje, knižnice a služby, ktoré sú potrebné na jej spustenie a beh.}
 \subsubsection{Express.js}
+Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}.
+ Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu.
+ Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
+ \cite{express}
 \subsection{Databázové systémy}
 \subsubsection{PostgreSQL}
 \subsubsection{DBDiagram}
