@@ -119,7 +119,8 @@ Backend predstavuje časť softvérovej aplikácie, ktorá nie je priamo prístu
   Hoci sú často backend a frontend vyvíjané oddelenými tímami, hranica medzi nimi môže byť nejasná, čo vedie k prístupu známemu ako full-stack\footnote{Full-stack vývoj je proces, kde vývojár pracuje na frontende aj backende, teda na používateľskom rozhraní aj serverovej logike.} development, kde programátori pracujú na oboch stranách aplikácie.
    V minulosti backend pozostával prevažne z jednoduchých serverových skriptov, avšak s rozvojom webových technológií sa využívajú pokročilé frameworky umožňujúce dynamickú generáciu obsahu.
  Efektívny backendový kód je kľúčový pre optimalizáciu výkonu aplikácie, minimalizáciu zaťaženia servera a databázy, a zabezpečenie rýchlej odozvy pre používateľov. \cite{backend} 
- 
+ \subsection{API}
+ \subsection{REST}
 \subsubsection{CORS}
 CORS (Cross-Origin Resource Sharing) predstavuje mechanizmus, ktorý umožňuje realizáciu HTTP požiadaviek medzi rôznymi doménami (tzv. cross-origin požiadavky).
  Ide o spôsob, ako prehliadače môžu bezpečne vykonávať požiadavky na zdroje umiestnené na iných serveroch, než odkiaľ pochádza pôvodná webová stránka. 
@@ -135,18 +136,32 @@ Node.js je runtime prostredie umožňujúce použitie JavaScriptu na strane serv
  Hoci JavaScript býva kritizovaný za nespoľahlivosť, táto kritika vyplýva predovšetkým zo zvláštností \acrshort{dom}-u v prehliadačoch, nie zo samotného jazyka.
  Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie. \cite{nodejs}
  \footnote{Runtime prostredie je prostredie poskytujúce aplikácii všetky potrebné zdroje, knižnice a služby, ktoré sú potrebné na jej spustenie a beh.}
-\subsubsection{Express.js}
-Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}.
- Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu.
- Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
- \cite{express}
+\subsubsection{Express}
+Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}. Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu. Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
+
+Jeho minimalistická architektúra ponúka veľkú mieru flexibility – vývojári nie sú nútení dodržiavať presne stanovenú štruktúru projektu, no zároveň majú k dispozícii nástroje na efektívne spracovanie HTTP požiadaviek, tvorbu routovacích pravidiel a využívanie middleware vrstiev. Express umožňuje jednoduché vytváranie \acrshort{rest}ful \acrshort{api} a dynamických webových aplikácií. Pre svoju jednoduchosť, rozsiahlu dokumentáciu a silnú komunitu patrí medzi najpopulárnejšie riešenia pre serverovú časť aplikácií postavených na JavaScripte.\cite{express}\cite{backendframework}
 \subsection{Databázové systémy}
 \subsubsection{PostgreSQL}
 \subsubsection{DBDiagram}
 \subsection{Framework}
+Framework je softvérová platforma poskytujúca vývojárom preddefinovanú štruktúru a nástroje, ktoré urýchľujú a zjednodušujú proces vývoja aplikácií.
+ Existujú rôzne typy frameworkov podľa oblasti použitia, napríklad webové, desktopové či mobilné.
+ Používanie frameworkov prináša výhody ako rýchlejší vývoj, lepšiu kvalitu kódu a štandardizáciu práce vývojárov. \cite{framework}
 \subsubsection{Frontendové frameworky}
+Frontend framework je špecializovaný typ frameworku určený na vývoj používateľských rozhraní webových aplikácií.
+ Na rozdiel od všeobecných frameworkov, ktoré môžu pokrývať celý vývojový cyklus aplikácie, frontend framework sa sústreďuje výhradne na klientskú časť – teda na to, čo používateľ vidí a s čím interaguje v prehliadači.
+  Poskytuje nástroje a štruktúru na organizáciu komponentov, správu stavu aplikácie a manipuláciu s \acrshort{dom}-om, čím umožňuje tvorbu dynamických, responzívnych a udržiavateľných rozhraní.
+  \subsubsection{Rozdiel medzi CSS a JavaScript (JS) frameworkmi}
+  \begin{itemize}
+  \item CSS frameworky (napr. Bootstrap, Tailwind CSS, Materialize) sú zamerané na vizuálnu stránku webu – poskytujú hotové štýly, rozloženia, komponenty (tlačidlá, formuláre, mriežky), ktoré zjednodušujú tvorbu konzistentného a estetického dizajnu. Ide predovšetkým o „vzhľad“ aplikácie.
+  \item JS frameworky (napr. React, Angular, Vue.js) naopak poskytujú funkčnú logiku a štruktúru aplikácie. 
+  Umožňujú pracovať s dátami, dynamicky meniť obsah stránky bez opätovného načítania (tzv. \acrshort{spa}), pracovať s API a definovať správanie komponentov.\cite{feframework}
+\end{itemize}
 \subsubsection{Backendové frameworky}
-
+Back-end framework je softvérový nástroj, ktorý uľahčuje vývoj serverovej časti webovej aplikácie. 
+Poskytuje štruktúru, komponenty a funkcie potrebné na spracovanie požiadaviek, prácu s databázou, autentifikáciu a ďalšie serverové operácie. 
+Cieľom back-end frameworku je zefektívniť vývoj, zabezpečiť konzistentnosť kódu a podporiť štandardizované riešenia. 
+Rôzne frameworky (napr. Django, Spring, Laravel, Ruby on Rails, Express) sa líšia podľa náročnosti projektu, škálovateľnosti, dokumentácie a vhodnosti pre začiatočníkov či veľké podnikové aplikácie.\cite{backendframework}
 
 \subsection{UI a UX}
 Používateľské rozhranie predstavuje vizuálnu časť digitálneho produktu, s ktorou používateľ priamo interaguje. 
