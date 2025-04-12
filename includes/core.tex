@@ -80,13 +80,13 @@ Pomocou \acrshort{css} je možné nastaviť rôzne vizuálne vlastnosti, ako sú
  Moderné techniky, ako flexbox a grid, umožňujú presné rozmiestnenie a zarovnanie prvkov na stránke, čo je užitočné pri tvorbe komplexných rozložení.
 
 \subsubsection{SCSS}
-\acrfull{scss} \cite{scss} je rozšírenie jazyka \acrshort{css}, ktoré pridáva pokročilé funkcie pre efektívnejšie štýlovanie webových stránok. 
+\acrfull{scss} je rozšírenie jazyka \acrshort{css}, ktoré pridáva pokročilé funkcie pre efektívnejšie štýlovanie webových stránok. 
 \acrshort{scss} umožňuje používať premenné, vnáranie selektorov, mixiny, funkcie a operácie, čím zjednodušuje správu a údržbu štýlov.
  Vďaka svojim vlastnostiam podporuje modulárny prístup k tvorbe štýlov, čím zlepšuje čitateľnosť kódu a urýchľuje vývoj.
 
  \acrshort{scss} používa štandardnú \acrshort{css} syntax s doplnením nových funkcií, čo zabezpečuje spätnú kompatibilitu.
  Kód napísaný v \acrshort{scss} sa následne kompiluje do klasického \acrshort{css}, ktoré podporujú všetky moderné prehliadače. 
-Tento proces zvyšuje flexibilitu vývoja a umožňuje tvorbu komplexných štýlových štruktúr.
+Tento proces zvyšuje flexibilitu vývoja a umožňuje tvorbu komplexných štýlových štruktúr.\cite{scss}
 \subsubsection{JavaScript}
 JavaScript \cite{JavaScript} je interpretovaný programovací jazyk ktorý umožňuje dynamickú interakciu s používateľom a zmeny obsahu webových stránok bez nutnosti ich opätovného načítania.
 
@@ -105,12 +105,21 @@ TypeScript \cite{TypeScript} je programovací jazyk vyvinutý spoločnosťou Mic
    Po napísaní sa kód v TypeScripte transpiluje do štandardného JavaScriptu, ktorý je podporovaný vo všetkých moderných prehliadačoch. 
    Tento prístup umožňuje využívať výhody moderných programovacích techník pri zachovaní širokej kompatibility a flexibility, ktorú JavaScript ponúka.
 \subsubsection{MathJax}
-MathJax \cite{MathJax} je open-source JavaScriptový engine určený na zobrazovanie matematickej notácie, ako sú LaTeX, MathML a AsciiMath, v moderných webových prehliadačoch.
+MathJax \cite{MathJax} je open-source\footnote{Open-source je softvér, ktorého zdrojový kód je voľne dostupný, môže byť používaný, upravovaný a distribuovaný kýmkoľvek.} JavaScriptový engine určený na zobrazovanie matematickej notácie, ako sú LaTeX, MathML a AsciiMath, v moderných webových prehliadačoch.
 Je navrhnutý tak, aby konsolidoval pokroky vo webových technológiách do jednotnej platformy pre matematiku na webe, podporujúc hlavné prehliadače a operačné systémy, vrátane mobilných zariadení.
 Používatelia nemusia inštalovať žiadne doplnky ani softvér; stačí, aby autor stránky zahrnul MathJax a matematický obsah do webovej stránky, a MathJax sa postará o zvyšok.
 
 
-%  \subsubsection{Bootstrap}
+  \subsubsection{MathQuill}
+  MathQuill \cite{mathquill} je open-source webový editor matematických výrazov navrhnutý tak, aby umožňoval jednoduché a estetické zadávanie matematiky priamo v prehliadači. 
+  Umožňuje používateľom zadávať a zobrazovať matematické výrazy v známej vizuálnej forme pomocou syntaxe podobnej LaTeXu.
+
+Je obľúbený v edukatívnych a interaktívnych webových aplikáciách, pretože poskytuje dynamické pole, v ktorom možno editovať matematické vzorce s okamžitým vizuálnym výstupom. 
+MathQuill podporuje rôzne režimy – ako zobrazenie statických výrazov, interaktívne polia pre vstup používateľa alebo čítanie/zápis LaTeX kódu.
+\subsubsection{ApexCharts}
+ApexCharts\cite{apexcharts} je open-source JavaScriptová knižnica určená na vizualizáciu dát v podobe interaktívnych grafov.
+ Poskytuje širokú škálu grafických typov a umožňuje ich jednoduchú integráciu do webových aplikácií s podporou populárnych frameworkov ako React, Angular či Vue. 
+Vďaka svojej flexibilite, responzívnosti a podpore dynamických dát sa často využíva pri tvorbe analytických nástrojov a interaktívnych dashboardov.
 
 \subsection{Backend}
 Backend predstavuje časť softvérovej aplikácie, ktorá nie je priamo prístupná používateľom; ide o serverovú stranu v klient-server architektúre.
@@ -120,29 +129,61 @@ Backend predstavuje časť softvérovej aplikácie, ktorá nie je priamo prístu
    V minulosti backend pozostával prevažne z jednoduchých serverových skriptov, avšak s rozvojom webových technológií sa využívajú pokročilé frameworky umožňujúce dynamickú generáciu obsahu.
  Efektívny backendový kód je kľúčový pre optimalizáciu výkonu aplikácie, minimalizáciu zaťaženia servera a databázy, a zabezpečenie rýchlej odozvy pre používateľov. \cite{backend} 
  \subsubsection{API}
+ \acrfull{api} je rozhranie, ktoré umožňuje jednej aplikácii komunikovať s inou aplikáciou alebo systémom. 
+ Umožňuje vývojárom využívať už existujúce funkcionality bez toho, aby ich museli znova vytvárať, čím urýchľuje a zjednodušuje vývoj softvéru.
+  \acrshort{api} definuje spôsob výmeny dát medzi klientom a serverom – napríklad keď mobilná aplikácia zobrazuje údaje o počasí získané zo servera.\cite{api}
  \subsubsection{REST}
+ \acrshort{rest} \acrshort{api} (\acrfull{rest} acrfull{api}) je typ webového \acrshort{api}, ktorý umožňuje aplikáciám komunikovať medzi sebou pomocou štandardných \acrshort{http} protokolov. 
+ REST API využíva jednoduché operácie ako čítanie, zápis, úprava a mazanie dát prostredníctvom \acrshort{url} adries a HTTP metód.
+
+Jeho výhodou je jednoduchá štruktúra, škálovateľnosť a nezávislosť medzi klientom a serverom – klient nemusí poznať vnútornú logiku servera a server nemusí vedieť nič o klientskom rozhraní.
+ REST API je široko používané pri vývoji moderných webových a mobilných aplikácií, pretože umožňuje flexibilnú a efektívnu výmenu dát.
 \subsubsection{CORS}
 CORS (Cross-Origin Resource Sharing) predstavuje mechanizmus, ktorý umožňuje realizáciu HTTP požiadaviek medzi rôznymi doménami (tzv. cross-origin požiadavky).
  Ide o spôsob, ako prehliadače môžu bezpečne vykonávať požiadavky na zdroje umiestnené na iných serveroch, než odkiaľ pochádza pôvodná webová stránka. 
  V minulosti takéto požiadavky bránila politika rovnakého pôvodu (same-origin policy), ktorá obmedzovala skripty bežiace v prehliadači výhradne na komunikáciu so serverom tej istej domény.
 
-Mechanizmus CORS funguje tak, že server explicitne definuje, kto môže vytvárať požiadavky na jeho \acrshort{api} \footnote{API (Application Programming Interface) je rozhranie, ktoré umožňuje komunikáciu a výmenu dát medzi rôznymi softvérovými aplikáciami alebo systémami.}
+Mechanizmus CORS funguje tak, že server explicitne definuje, kto môže vytvárať požiadavky na jeho \acrshort{api}
 , aké typy požiadaviek sú povolené a aké HTTP metódy sú podporované.
  Toto sa realizuje prostredníctvom špeciálnych HTTP hlavičiek, ktoré umožňujú prehliadaču určiť, či konkrétna požiadavka medzi rôznymi doménami môže byť bezpečne vykonaná.
  \cite{CORS}
 \subsubsection{Node.js}
-Node.js je runtime prostredie umožňujúce použitie JavaScriptu na strane servera, pričom využíva flexibilitu a jednoduchosť tohto programovacieho jazyka.
+Node.js je runtime\footnote{Runtime prostredie je prostredie poskytujúce aplikácii všetky potrebné zdroje, knižnice a služby, ktoré sú potrebné na jej spustenie a beh.}
+prostredie umožňujúce použitie JavaScriptu na strane servera, pričom využíva flexibilitu a jednoduchosť tohto programovacieho jazyka.
  Výhodou JavaScriptu sú jeho pokročilé koncepty ako „first-class functions“ (funkcie prvej triedy) a closures, ktoré umožňujú vytváranie efektívnych webových aplikácií. 
  Hoci JavaScript býva kritizovaný za nespoľahlivosť, táto kritika vyplýva predovšetkým zo zvláštností \acrshort{dom}-u v prehliadačoch, nie zo samotného jazyka.
- Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie. \cite{nodejs}
- \footnote{Runtime prostredie je prostredie poskytujúce aplikácii všetky potrebné zdroje, knižnice a služby, ktoré sú potrebné na jej spustenie a beh.}
+ Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie.\cite{nodejs}
 \subsubsection{Express}
 Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}. Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu. Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
 
 Jeho minimalistická architektúra ponúka veľkú mieru flexibility – vývojári nie sú nútení dodržiavať presne stanovenú štruktúru projektu, no zároveň majú k dispozícii nástroje na efektívne spracovanie HTTP požiadaviek, tvorbu routovacích pravidiel a využívanie middleware vrstiev. Express umožňuje jednoduché vytváranie \acrshort{rest}ful \acrshort{api} a dynamických webových aplikácií. Pre svoju jednoduchosť, rozsiahlu dokumentáciu a silnú komunitu patrí medzi najpopulárnejšie riešenia pre serverovú časť aplikácií postavených na JavaScripte.\cite{express}\cite{backendframework}
 \subsection{Databázové systémy}
+Databázový systém je softvérové riešenie, ktoré slúži na efektívne uchovávanie, správu a vyhľadávanie dát. 
+Umožňuje vytvárať databázy, ktoré obsahujú štruktúrované dáta usporiadané v tabuľkách, a poskytuje nástroje na ich úpravu, triedenie, filtrovanie a prezentáciu.
+
+Databáza samotná je organizovaný súbor údajov, často rozdelený do tabuliek, ktoré spolu súvisia a medzi ktorými môžu byť definované vzťahy. 
+Cieľom databázového systému je zabezpečiť integritu, konzistenciu a dostupnosť dát, pričom používateľ môže s dátami pracovať pomocou formulárov, dotazov či zostáv.\cite{databazovesystemy}
+
+\subsubsection{SQL}
+ \acrfull{sql} je jazyk navrhnutý na prácu s dátami v relačných databázach, pričom umožňuje ich efektívne ukladanie, organizáciu a získavanie.
+  V \acrshort{sql} sa údaje ukladajú do tabuliek, ktoré fungujú ako dvojrozmerné štruktúry zložené z riadkov a stĺpcov. 
+  Každá tabuľka predstavuje určitý typ objektu (napr. zákazníci, produkty) a každý riadok v tabuľke predstavuje jeden záznam s konkrétnymi údajmi.
+
+Pomocou dotazov (queries) je možné z databázy získať presne tie údaje, ktoré používateľ potrebuje – napríklad filtrovať podľa podmienok, zoskupovať dáta alebo ich spájať z viacerých tabuliek.
+ Dotazy sú základom práce s \acrshort{sql} a umožňujú analyzovať, transformovať a prezentovať uložené informácie v požadovanej forme.\cite{sql}
+
 \subsubsection{PostgreSQL}
+PostgreSQL je pokročilý open-source objektovo-relačný databázový systém (\acrshort{ordbms}), ktorý kombinuje tradičné vlastnosti relačných databáz so schopnosťou pracovať s objektovo orientovanými prvkami. 
+To znamená, že okrem práce s tabuľkami a vzťahmi (typických pre \acrfull{rdbms}) podporuje aj vlastné dátové typy, dedičnosť, či ukladanie komplexných štruktúr, ako sú napríklad JSON či geografické dáta.
+
+Ako \acrshort{ordbms}, PostgreSQL umožňuje definovať vlastné funkcie, procedúry a typy, čím ponúka vysokú mieru prispôsobiteľnosti pre náročné aplikácie. 
+Je navrhnutý s dôrazom na integritu dát, rozšíriteľnosť a štandardy \acrshort{sql}, a preto je široko používaný v podnikových riešeniach, výskumných systémoch aj moderných webových aplikáciách.\cite{postgre}
 \subsubsection{DBDiagram}
+dbdiagram.io je bezplatný online nástroj, ktorý umožňuje vývojárom a dátovým analytikom jednoducho vytvárať diagramy a databázových štruktúr pomocou jednoduchého textového zápisu.
+Jeho hlavnou výhodou je schopnosť rýchlo a efektívne navrhovať a vizualizovať databázové schémy, čo uľahčuje plánovanie a komunikáciu v tímoch.
+ Používatelia môžu definovať tabuľky, stĺpce a vzťahy medzi nimi v jednoduchom jazyku, pričom nástroj automaticky generuje zodpovedajúci diagram.
+  Okrem toho dbdiagram.io podporuje import a export SQL skriptov, čo umožňuje integráciu s existujúcimi databázami a uľahčuje migráciu alebo dokumentáciu databázových štruktúr.
+ Vďaka týmto funkciám je dbdiagram.io obľúbeným nástrojom pre rýchly návrh databáz a spoluprácu na databázových projektoch.
 \subsection{Framework}
 Framework je softvérová platforma poskytujúca vývojárom preddefinovanú štruktúru a nástroje, ktoré urýchľujú a zjednodušujú proces vývoja aplikácií.
  Existujú rôzne typy frameworkov podľa oblasti použitia, napríklad webové, desktopové či mobilné.
@@ -188,8 +229,6 @@ Umožňuje tímovú spoluprácu v reálnom čase prostredníctvom webového preh
    Medzi kľúčové vlastnosti Angularu patrí obojsmerná väzba dát, ktorá synchronizuje model a zobrazenie, a modulárny systém, ktorý umožňuje rozdelenie aplikácie na menšie, ľahko spravovateľné časti.
   Angular tiež obsahuje nástroje na správu formulárov, komunikáciu so serverom a smerovanie, čo umožňuje vytvárať komplexné aplikácie s minimálnym úsilím. \cite{angular}
 
-
-
 \subsection{Gamifikácia}
 Gamifikácia je aplikácia herných prvkov a princípov v neherných kontextoch s cieľom zvýšiť angažovanosť a motiváciu jednotlivcov pri vykonávaní určitých aktivít.
  Tento prístup sa využíva v rôznych oblastiach, ako sú vzdelávanie, marketing, podnikanie a osobný rozvoj.
@@ -200,7 +239,23 @@ Gamifikácia v e-learningu zahŕňa integráciu herných prvkov, ako sú body, o
   Implementácia herných mechanizmov v e-learningových kurzoch môže viesť k zlepšeniu zapojenia študentov, zvýšeniu ich motivácie a následne k lepším vzdelávacím výsledkom.
 
 \subsection{Server}
-\subsubsection{Kontejnerizácia}
-\subsubsection{Docker}
+Server je centrálny počítač v sieti, ktorý poskytuje služby a zdroje iným zariadeniam – tzv. klientom. 
+Umožňuje uchovávať a sprístupňovať dáta, spúšťať aplikácie, spracovávať požiadavky používateľov alebo poskytovať webové stránky či e-mailové služby.
+ Môže ísť o fyzický počítač alebo virtuálny stroj a jeho konkrétna funkcia závisí od typu – napríklad súborový, databázový, aplikačný alebo webový server. 
+ Správne nastavený server je základom spoľahlivej a bezpečnej IT infraštruktúry.\cite{server}
 \subsubsection{NGINX}
+Nginx\cite{nginx} je výkonný a spoľahlivý webový a reverzný proxy server, ktorý je navrhnutý na efektívne spracovanie veľkého množstva súčasných pripojení pri minimálnom využití systémových zdrojov. 
+Najčastejšie sa používa na poskytovanie statického obsahu, ako sú HTML, CSS, JavaScript alebo obrázky, a zároveň ako sprostredkovateľ medzi klientom a backend aplikáciou, čím preposiela požiadavky na servery bežiace napríklad v Node.js alebo PHP. 
+Nginx dokáže tiež rozdeľovať záťaž medzi viaceré servery, čím zabezpečuje vyššiu dostupnosť a škálovateľnosť aplikácií, a môže slúžiť ako cache server pre rýchlejšie doručovanie často používaného obsahu.
+ Vďaka svojej asynchrónnej architektúre a podpore moderných protokolov, ako sú \acrshort{http}/3 a \acrshort{tls}, je ideálnym riešením pre hosting moderných webových aplikácií s vysokými nárokmi na výkon.
+\subsubsection{Docker}
+Docker je open-source platforma, ktorá umožňuje vývoj, distribúciu a správu aplikácií pomocou tzv. kontajnerov. 
+Kontajner je ľahké a izolované prostredie, ktoré obsahuje všetko potrebné na beh aplikácie – vrátane kódu, knižníc, runtime prostredia a nastavení.
+
+Vďaka tomu môže aplikácia bežať rovnakým spôsobom na rôznych miestach, napríklad na vývojárskom počítači, v testovacom prostredí aj na produkčnom serveri. 
+Docker využíva virtualizáciu na úrovni operačného systému, čo mu umožňuje spúšťať viacero kontajnerov efektívne a s nízkymi nárokmi na systémové prostriedky.\cite{docker}
 \subsection{GIT}
+Git je distribuovaný systém na správu verzií, ktorý umožňuje sledovať a zaznamenávať zmeny v súboroch počas vývoja softvéru.
+ Umožňuje viacerým vývojárom pracovať súčasne na tom istom projekte, pričom každá kópia projektu obsahuje úplnú históriu zmien. 
+ Git je známy svojou rýchlosťou, flexibilitou a podporou nelineárnych pracovných tokov. 
+Je open-source, bezplatný a vďaka svojim vlastnostiam sa stal štandardom v oblasti verzionovania kódu.\cite{git}
