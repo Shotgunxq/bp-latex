@@ -98,7 +98,17 @@ Je multiplatformový a podporuje rôzne zariadenia, ako sú počítače, smartf�
 
 Medzi hlavné vlastnosti patrí manipulácia s \acrfull{dom}, spracovanie udalostí, manipulácia s dátami a podpora asynchrónnych volaní na server pomocou techniky \acrfull{ajax}.
  Tieto vlastnosti z neho robia základný nástroj na tvorbu moderných webových aplikácií.
-\subsubsection{TypeScript}
+ \subsubsection{AJAX}
+ AJAX (Asynchronous JavaScript and XML) je technológia, ktorá umožňuje webovým aplikáciám načítavať a odosielať dáta na pozadí bez nutnosti obnoviť celú stránku.
+  Funguje na kombinácii známych technológií – HTML, CSS, JavaScript a XMLHttpRequest (alebo moderného fetch) – a výrazne zlepšuje interaktivitu a používateľskú skúsenosť. 
+ AJAX sa využíva napríklad v ankete bez reloadu, našeptávačoch alebo moderných single-page aplikáciách.\cite{ajax}
+\subsubsection{jQuery}
+jQuery je open-source knižnica napísaná v JavaScripte, ktorá uľahčuje prácu s HTML dokumentom, manipuláciu s DOM, prácu s udalosťami, animáciami a technológiou AJAX.
+ Bola vytvorená v roku 2006 s cieľom zjednodušiť vývoj v čase, keď neexistovala jednotná podpora v prehliadačoch.
+  Aj napriek tomu, že je dnes považovaná za technicky zastaranú a datovo náročnú, stále sa používa na mnohých weboch vďaka svojej jednoduchosti a veľkému množstvu dostupných pluginov.\cite{jquery}
+
+
+ \subsubsection{TypeScript}
 TypeScript \cite{TypeScript} je programovací jazyk vyvinutý spoločnosťou Microsoft, ktorý rozširuje možnosti JavaScriptu pridaním statického typovania a pokročilých objektovo orientovaných prvkov.
  Tým umožňuje vývojárom identifikovať chyby už počas vývoja, čo zvyšuje spoľahlivosť a udržiavateľnosť kódu.
   TypeScript je nadmnožinou JavaScriptu, čo znamená, že všetok platný kód v JavaScripte je kompatibilný s TypeScriptom.
@@ -152,58 +162,75 @@ Node.js je runtime\footnote{Runtime prostredie je prostredie poskytujúce aplik�
 prostredie umožňujúce použitie JavaScriptu na strane servera, pričom využíva flexibilitu a jednoduchosť tohto programovacieho jazyka.
  Výhodou JavaScriptu sú jeho pokročilé koncepty ako „first-class functions“ (funkcie prvej triedy) a closures, ktoré umožňujú vytváranie efektívnych webových aplikácií. 
  Hoci JavaScript býva kritizovaný za nespoľahlivosť, táto kritika vyplýva predovšetkým zo zvláštností \acrshort{dom}-u v prehliadačoch, nie zo samotného jazyka.
- Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie.\cite{nodejs}
-\subsubsection{Express}
-Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}. Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu. Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
-
-Jeho minimalistická architektúra ponúka veľkú mieru flexibility – vývojári nie sú nútení dodržiavať presne stanovenú štruktúru projektu, no zároveň majú k dispozícii nástroje na efektívne spracovanie HTTP požiadaviek, tvorbu routovacích pravidiel a využívanie middleware vrstiev. Express umožňuje jednoduché vytváranie \acrshort{rest}ful \acrshort{api} a dynamických webových aplikácií. Pre svoju jednoduchosť, rozsiahlu dokumentáciu a silnú komunitu patrí medzi najpopulárnejšie riešenia pre serverovú časť aplikácií postavených na JavaScripte.\cite{express}\cite{backendframework}
-\subsection{Databázové systémy}
-Databázový systém je softvérové riešenie, ktoré slúži na efektívne uchovávanie, správu a vyhľadávanie dát. 
-Umožňuje vytvárať databázy, ktoré obsahujú štruktúrované dáta usporiadané v tabuľkách, a poskytuje nástroje na ich úpravu, triedenie, filtrovanie a prezentáciu.
-
-Databáza samotná je organizovaný súbor údajov, často rozdelený do tabuliek, ktoré spolu súvisia a medzi ktorými môžu byť definované vzťahy. 
-Cieľom databázového systému je zabezpečiť integritu, konzistenciu a dostupnosť dát, pričom používateľ môže s dátami pracovať pomocou formulárov, dotazov či zostáv.\cite{databazovesystemy}
-
-\subsubsection{SQL}
+ \subsection{Databázové systémy}
+ Databázový systém je softvérové riešenie, ktoré slúži na efektívne uchovávanie, správu a vyhľadávanie dát. 
+ Umožňuje vytvárať databázy, ktoré obsahujú štruktúrované dáta usporiadané v tabuľkách, a poskytuje nástroje na ich úpravu, triedenie, filtrovanie a prezentáciu.
+ 
+ Databáza samotná je organizovaný súbor údajov, často rozdelený do tabuliek, ktoré spolu súvisia a medzi ktorými môžu byť definované vzťahy. 
+ Cieľom databázového systému je zabezpečiť integritu, konzistenciu a dostupnosť dát, pričom používateľ môže s dátami pracovať pomocou formulárov, dotazov či zostáv.\cite{databazovesystemy}
+ 
+ \subsubsection{SQL}
  \acrfull{sql} je jazyk navrhnutý na prácu s dátami v relačných databázach, pričom umožňuje ich efektívne ukladanie, organizáciu a získavanie.
-  V \acrshort{sql} sa údaje ukladajú do tabuliek, ktoré fungujú ako dvojrozmerné štruktúry zložené z riadkov a stĺpcov. 
-  Každá tabuľka predstavuje určitý typ objektu (napr. zákazníci, produkty) a každý riadok v tabuľke predstavuje jeden záznam s konkrétnymi údajmi.
-
-Pomocou dotazov (queries) je možné z databázy získať presne tie údaje, ktoré používateľ potrebuje – napríklad filtrovať podľa podmienok, zoskupovať dáta alebo ich spájať z viacerých tabuliek.
+ V \acrshort{sql} sa údaje ukladajú do tabuliek, ktoré fungujú ako dvojrozmerné štruktúry zložené z riadkov a stĺpcov. 
+ Každá tabuľka predstavuje určitý typ objektu (napr. zákazníci, produkty) a každý riadok v tabuľke predstavuje jeden záznam s konkrétnymi údajmi.
+ 
+ Pomocou dotazov (queries) je možné z databázy získať presne tie údaje, ktoré používateľ potrebuje – napríklad filtrovať podľa podmienok, zoskupovať dáta alebo ich spájať z viacerých tabuliek.
  Dotazy sú základom práce s \acrshort{sql} a umožňujú analyzovať, transformovať a prezentovať uložené informácie v požadovanej forme.\cite{sql}
-
-\subsubsection{PostgreSQL}
-PostgreSQL je pokročilý open-source objektovo-relačný databázový systém (\acrshort{ordbms}), ktorý kombinuje tradičné vlastnosti relačných databáz so schopnosťou pracovať s objektovo orientovanými prvkami. 
-To znamená, že okrem práce s tabuľkami a vzťahmi (typických pre \acrfull{rdbms}) podporuje aj vlastné dátové typy, dedičnosť, či ukladanie komplexných štruktúr, ako sú napríklad JSON či geografické dáta.
-
-Ako \acrshort{ordbms}, PostgreSQL umožňuje definovať vlastné funkcie, procedúry a typy, čím ponúka vysokú mieru prispôsobiteľnosti pre náročné aplikácie. 
-Je navrhnutý s dôrazom na integritu dát, rozšíriteľnosť a štandardy \acrshort{sql}, a preto je široko používaný v podnikových riešeniach, výskumných systémoch aj moderných webových aplikáciách.\cite{postgre}
-\subsubsection{DBDiagram}
-dbdiagram.io je bezplatný online nástroj, ktorý umožňuje vývojárom a dátovým analytikom jednoducho vytvárať diagramy a databázových štruktúr pomocou jednoduchého textového zápisu.
-Jeho hlavnou výhodou je schopnosť rýchlo a efektívne navrhovať a vizualizovať databázové schémy, čo uľahčuje plánovanie a komunikáciu v tímoch.
+ 
+ \subsubsection{PostgreSQL}
+ PostgreSQL je pokročilý open-source objektovo-relačný databázový systém (\acrshort{ordbms}), ktorý kombinuje tradičné vlastnosti relačných databáz so schopnosťou pracovať s objektovo orientovanými prvkami. 
+ To znamená, že okrem práce s tabuľkami a vzťahmi (typických pre \acrfull{rdbms}) podporuje aj vlastné dátové typy, dedičnosť, či ukladanie komplexných štruktúr, ako sú napríklad JSON či geografické dáta.
+ 
+ Ako \acrshort{ordbms}, PostgreSQL umožňuje definovať vlastné funkcie, procedúry a typy, čím ponúka vysokú mieru prispôsobiteľnosti pre náročné aplikácie. 
+ Je navrhnutý s dôrazom na integritu dát, rozšíriteľnosť a štandardy \acrshort{sql}, a preto je široko používaný v podnikových riešeniach, výskumných systémoch aj moderných webových aplikáciách.\cite{postgre}
+ \subsubsection{DBDiagram}
+ dbdiagram.io je bezplatný online nástroj, ktorý umožňuje vývojárom a dátovým analytikom jednoducho vytvárať diagramy a databázových štruktúr pomocou jednoduchého textového zápisu.
+ Jeho hlavnou výhodou je schopnosť rýchlo a efektívne navrhovať a vizualizovať databázové schémy, čo uľahčuje plánovanie a komunikáciu v tímoch.
  Používatelia môžu definovať tabuľky, stĺpce a vzťahy medzi nimi v jednoduchom jazyku, pričom nástroj automaticky generuje zodpovedajúci diagram.
-  Okrem toho dbdiagram.io podporuje import a export SQL skriptov, čo umožňuje integráciu s existujúcimi databázami a uľahčuje migráciu alebo dokumentáciu databázových štruktúr.
+ Okrem toho dbdiagram.io podporuje import a export SQL skriptov, čo umožňuje integráciu s existujúcimi databázami a uľahčuje migráciu alebo dokumentáciu databázových štruktúr.
  Vďaka týmto funkciám je dbdiagram.io obľúbeným nástrojom pre rýchly návrh databáz a spoluprácu na databázových projektoch.
-\subsection{Framework}
-Framework je softvérová platforma poskytujúca vývojárom preddefinovanú štruktúru a nástroje, ktoré urýchľujú a zjednodušujú proces vývoja aplikácií.
+ \subsection{Framework}
+ Framework je softvérová platforma poskytujúca vývojárom preddefinovanú štruktúru a nástroje, ktoré urýchľujú a zjednodušujú proces vývoja aplikácií.
  Existujú rôzne typy frameworkov podľa oblasti použitia, napríklad webové, desktopové či mobilné.
  Používanie frameworkov prináša výhody ako rýchlejší vývoj, lepšiu kvalitu kódu a štandardizáciu práce vývojárov. \cite{framework}
-\subsubsection{Frontendové frameworky}
-Frontend framework je špecializovaný typ frameworku určený na vývoj používateľských rozhraní webových aplikácií.
+ \subsubsection{Frontendové frameworky}
+ Frontend framework je špecializovaný typ frameworku určený na vývoj používateľských rozhraní webových aplikácií.
  Na rozdiel od všeobecných frameworkov, ktoré môžu pokrývať celý vývojový cyklus aplikácie, frontend framework sa sústreďuje výhradne na klientskú časť – teda na to, čo používateľ vidí a s čím interaguje v prehliadači.
-  Poskytuje nástroje a štruktúru na organizáciu komponentov, správu stavu aplikácie a manipuláciu s \acrshort{dom}-om, čím umožňuje tvorbu dynamických, responzívnych a udržiavateľných rozhraní.
-  \subsubsection{Rozdiel medzi CSS a JavaScript (JS) frameworkmi}
-  \begin{itemize}
+ Poskytuje nástroje a štruktúru na organizáciu komponentov, správu stavu aplikácie a manipuláciu s \acrshort{dom}-om, čím umožňuje tvorbu dynamických, responzívnych a udržiavateľných rozhraní.
+ \subsubsection{Rozdiel medzi CSS a JavaScript (JS) frameworkmi}
+ \begin{itemize}
   \item CSS frameworky (napr. Bootstrap, Tailwind CSS, Materialize) sú zamerané na vizuálnu stránku webu – poskytujú hotové štýly, rozloženia, komponenty (tlačidlá, formuláre, mriežky), ktoré zjednodušujú tvorbu konzistentného a estetického dizajnu. Ide predovšetkým o „vzhľad“ aplikácie.
   \item JS frameworky (napr. React, Angular, Vue.js) naopak poskytujú funkčnú logiku a štruktúru aplikácie. 
   Umožňujú pracovať s dátami, dynamicky meniť obsah stránky bez opätovného načítania (tzv. \acrshort{spa}), pracovať s API a definovať správanie komponentov.\cite{feframework}
 \end{itemize}
+\subsubsection{Angular}
+Angular je open-source framework vyvinutý spoločnosťou Google, určený na tvorbu dynamických a responzívnych webových aplikácií.
+Umožňuje vývojárom vytvárať aplikácie s bohatou funkcionalitou prostredníctvom komponentovo orientovanej architektúry, ktorá podporuje opätovné použitie kódu a zjednodušuje údržbu aplikácií.
+Angular využíva TypeScript, nadmnožinu JavaScriptu, ktorá pridáva statické typovanie a ďalšie funkcie zlepšujúce vývojový proces. 
+Medzi kľúčové vlastnosti Angularu patrí obojsmerná väzba dát, ktorá synchronizuje model a zobrazenie, a modulárny systém, ktorý umožňuje rozdelenie aplikácie na menšie, ľahko spravovateľné časti.
+Angular tiež obsahuje nástroje na správu formulárov, komunikáciu so serverom a smerovanie, čo umožňuje vytvárať komplexné aplikácie s minimálnym úsilím. \cite{angular}
+
+\subsubsection{RxJs}
+\acrshort{rxjs} \acrfull{rxjs} je knižnica určená na reaktívne programovanie, ktorá umožňuje efektívne spracovanie asynchrónnych a udalostne založených dátových tokov pomocou tzv. observables. 
+Tieto observables predstavujú prúdy dát (napr. kliknutia, HTTP odpovede), ktoré môžu byť pozorované a spracovávané rôznymi operátormi ako map, filter či reduce.
+
+RxJS umožňuje prehľadnejšie a konzistentnejšie riadiť komplexné interakcie v aplikáciách, najmä tam, kde dochádza k častým zmenám stavu alebo udalostiam v čase.
+Využíva sa najmä v moderných frontend frameworkoch, ako je Angular, kde zjednodušuje prácu s dátami a udalosťami.\cite{rxjs}
 \subsubsection{Backendové frameworky}
 Back-end framework je softvérový nástroj, ktorý uľahčuje vývoj serverovej časti webovej aplikácie. 
 Poskytuje štruktúru, komponenty a funkcie potrebné na spracovanie požiadaviek, prácu s databázou, autentifikáciu a ďalšie serverové operácie. 
 Cieľom back-end frameworku je zefektívniť vývoj, zabezpečiť konzistentnosť kódu a podporiť štandardizované riešenia. 
 Rôzne frameworky (napr. Django, Spring, Laravel, Ruby on Rails, Express) sa líšia podľa náročnosti projektu, škálovateľnosti, dokumentácie a vhodnosti pre začiatočníkov či veľké podnikové aplikácie.\cite{backendframework}
 
+Node.js tak využíva práve dobre definované vlastnosti JavaScriptu, ktoré umožňujú vytvárať vysoko výkonné platformy pre webové aplikácie.\cite{nodejs}
+\subsubsection{Express.js}
+Express je JavaScriptový framework fungujúci ako ľahká nadstavba nad Node.js, ktorý zjednodušuje tvorbu webových aplikácií a \acrshort{api}.
+Zatiaľ čo Node.js poskytuje základné prostredie pre spúšťanie JavaScriptu na serveri, Express pridáva štruktúru a pomáha vývojárom vyhnúť sa opakovanému a zdĺhavému písaniu nízkoúrovňového kódu. 
+Express je teda nástroj, ktorý zjednodušuje a zrýchľuje vývoj tým, že poskytuje vyššiu úroveň abstrakcie oproti základným funkciám dostupným v čistom Node.js.
+
+Jeho minimalistická architektúra ponúka veľkú mieru flexibility – vývojári nie sú nútení dodržiavať presne stanovenú štruktúru projektu, no zároveň majú k dispozícii nástroje na efektívne spracovanie HTTP požiadaviek, tvorbu routovacích pravidiel a využívanie middleware vrstiev. 
+Express umožňuje jednoduché vytváranie \acrshort{rest}ful \acrshort{api} a dynamických webových aplikácií.
+Pre svoju jednoduchosť, rozsiahlu dokumentáciu a silnú komunitu patrí medzi najpopulárnejšie riešenia pre serverovú časť aplikácií postavených na JavaScripte.\cite{express}\cite{backendframework}
 \subsection{UI a UX}
 Používateľské rozhranie predstavuje vizuálnu časť digitálneho produktu, s ktorou používateľ priamo interaguje. 
 Zahŕňa prvky ako tlačidlá, ikony, typografiu a farebné schémy. 
@@ -222,12 +249,6 @@ Umožňuje tímovú spoluprácu v reálnom čase prostredníctvom webového preh
  Angular Material UI je oficiálna knižnica komponentov pre Angular, ktorá implementuje dizajnové princípy Material Design od spoločnosti Google. 
  Poskytuje predpripravené a prispôsobiteľné komponenty, ako sú tlačidlá, formuláre, tabuľky či navigačné panely, ktoré umožňujú vývojárom rýchlo vytvárať moderné, responzívne a esteticky príjemné používateľské rozhrania.
   Angular Material UI podporuje integráciu s Angular frameworkom a zabezpečuje konzistentný dizajn a vysokú úroveň použiteľnosti v rámci aplikácií. \cite{materialUI}
- \subsubsection{Angular}
- Angular je open-source framework vyvinutý spoločnosťou Google, určený na tvorbu dynamických a responzívnych webových aplikácií.
-  Umožňuje vývojárom vytvárať aplikácie s bohatou funkcionalitou prostredníctvom komponentovo orientovanej architektúry, ktorá podporuje opätovné použitie kódu a zjednodušuje údržbu aplikácií.
-   Angular využíva TypeScript, nadmnožinu JavaScriptu, ktorá pridáva statické typovanie a ďalšie funkcie zlepšujúce vývojový proces. 
-   Medzi kľúčové vlastnosti Angularu patrí obojsmerná väzba dát, ktorá synchronizuje model a zobrazenie, a modulárny systém, ktorý umožňuje rozdelenie aplikácie na menšie, ľahko spravovateľné časti.
-  Angular tiež obsahuje nástroje na správu formulárov, komunikáciu so serverom a smerovanie, čo umožňuje vytvárať komplexné aplikácie s minimálnym úsilím. \cite{angular}
 
 \subsection{Gamifikácia}
 Gamifikácia je aplikácia herných prvkov a princípov v neherných kontextoch s cieľom zvýšiť angažovanosť a motiváciu jednotlivcov pri vykonávaní určitých aktivít.
@@ -259,3 +280,32 @@ Git je distribuovaný systém na správu verzií, ktorý umožňuje sledovať a 
  Umožňuje viacerým vývojárom pracovať súčasne na tom istom projekte, pričom každá kópia projektu obsahuje úplnú históriu zmien. 
  Git je známy svojou rýchlosťou, flexibilitou a podporou nelineárnych pracovných tokov. 
 Je open-source, bezplatný a vďaka svojim vlastnostiam sa stal štandardom v oblasti verzionovania kódu.\cite{git}
+
+\section{Návrh webovej aplikácie}
+Webová aplikácia je koncipovaná ako dvojvrstvový systém, pozostávajúci z frontendovej časti, implementovanej pomocou frameworku Angular, a backendovej časti, vytvorenej pomocou platformy Express.
+ Obe časti sú navrhnuté ako samostatné a na sebe nezávislé aplikácie, čo zvyšuje flexibilitu a umožňuje ich samostatný vývoj, testovanie a nasadzovanie.
+
+ Backendová časť je zodpovedná za spracovanie údajov, manipuláciu s databázou, \acrshort{ldap} autentifikáciu používateľov a spracovanie požiadaviek zo strany klienta.
+ Slúži ako integračná vrstva medzi používateľským rozhraním a databázou, pričom zabezpečuje bezpečný a efektívny prenos údajov. 
+ Backend sme implementovali pomocou frameworku Express.js, ktorý je postavený na Node.js a umožňuje jednoducho vytvárať REST API rozhrania. 
+ Medzi jeho hlavné výhody patrí jednoduchosť, flexibilita, rozsiahla komunita a množstvo dostupných middleware modulov, čo výrazne urýchľuje vývoj serverovej logiky.
+
+Express.js je zároveň ideálne riešenie pre aplikácie typu \acrshort{spa}, akú predstavuje aj náš frontend vytvorený v Angulari. 
+V tomto architektonickom modeli Express plní úlohu backendovej vrstvy, ktorá poskytuje API endpointy, prostredníctvom ktorých frontend získava dynamicky obsah a dáta. 
+Táto kombinácia umožňuje rýchlu a plynulú interakciu používateľa s aplikáciou bez potreby neustáleho obnovovania stránky, čím sa zvyšuje používateľský komfort a celkový výkon systému.
+
+Pomocou \acrshort{ldap} autentifikácie dokážeme navyše overovať identitu používateľov a priraďovať im prístupové práva na základe ich roly – napríklad ako študent alebo administrátor (učiteľ).
+ Tento prístup umožňuje efektívne riadenie oprávnení a zabezpečenie rôznych úrovní prístupu k funkcionalitám aplikácie.
+
+Frontendová časť aplikácie je navrhnutá ako \acrfull{spa}.
+ Použitie Angular frameworku bolo motivované jeho výbornou škálovateľnosťou a komponentovým prístupom, ktorý umožňuje vytvárať zapuzdrené (encapsulované) komponenty.
+  Tento prístup vedie k lepšej organizácii a čitateľnosti kódu, a zároveň uľahčuje jeho údržbu a opätovné použitie.
+
+Komunikácia medzi frontendom a backendom je sprostredkovaná prostredníctvom tzv. servisných tried (Services), ktoré Angular poskytuje ako jednu zo svojich kľúčových funkcionalít.
+ Tieto služby slúžia na získavanie údajov zo servera, validáciu používateľských vstupov, uchovávanie stavu aplikácie, ako aj na centrálne spracovanie logiky a dát. 
+ Každá Angular služba je singleton\footnote{Návrhový vzor, ktorý zabezpečuje, že z určitej triedy existuje v aplikácii práve jedna inštancia, ktorá je globálne dostupná.} objekt, čo umožňuje zdieľanie dát a funkcionality naprieč celou aplikáciou. 
+ Tento prístup významne zvyšuje modularitu systému a podporuje znovupoužiteľnosť kódu.
+
+ Pri asynchrónnej komunikácii a práci s údajmi využívame v Angulari mechanizmus Observables, ktorý je súčasťou knižnice \acrshort{rxjs}. 
+ Observables umožňujú efektívne pracovať s dátovými tokmi, ako sú napríklad \acrshort{http} požiadavky alebo používateľské vstupy, pričom poskytujú pokročilé možnosti ako je reaktívne spracovanie dát, zrušenie požiadaviek, spájanie viacerých streamov alebo transformácia údajov. 
+ Vďaka tejto reaktívnej paradigme dokáže aplikácia flexibilne reagovať na zmeny v dátach a zvyšuje sa jej interaktivita, výkon a stabilita.
