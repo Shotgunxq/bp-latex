@@ -436,5 +436,40 @@ Príklad zápisu jednej úlohy s použitím LaTeX zápisu je znázornený na obr
 \end{figure}
 
 
+\subsection{Použivateľské rozhranie}
+
+Používateľské rozhranie aplikácie bolo navrhnuté s dôrazom na prehľadnosť, jednoduchosť a intuitívnu navigáciu, čím sa znižuje kognitívna záťaž používateľa a zvyšuje sa celková používateľská skúsenosť (UX). Cieľom návrhu bolo zabezpečiť, aby sa aj používateľ s minimálnymi digitálnymi zručnosťami dokázal v prostredí jednoducho orientovať a efektívne pracovať so všetkými funkciami aplikácie.
+
+Základná štruktúra dizajnu bola vytvorená v nástroji Figma, ktorý umožnil vizuálny návrh používateľského rozhrania ešte pred samotnou implementáciou. Rozhranie je koncipované ako hlavné menu s veľkými, vizuálne výraznými blokmi, ktoré reprezentujú jednotlivé kľúčové funkcie aplikácie:
+\begin{itemize} 
+  \item Písanie testu 
+  \item Zobrazenie napísaných testov 
+  \item Export testov a výsledkov 
+  \item Prístup k študijným materiálom 
+\end{itemize}
+
+Ako môžeme vidieť na obrázku č.~\ref{homescreen}, ide o hlavnú obrazovku aplikácie, ktorá slúži ako východiskový bod pre všetky hlavné činnosti používateľa.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=16cm]{img/homepage.png}
+  \caption{Hlavná obrazovka aplikácie.}
+  \label{homescreen}
+\end{figure} 
+
+Navigácia v aplikácii je zabezpečená pomocou horného navigačného panela, ktorý obsahuje možnosť návratu na hlavnú obrazovku a tlačidlo pre odhlásenie zo systému. Tento prvok je dostupný na všetkých podstránkach aplikácie, čím sa zabezpečuje jednotný a konzistentný spôsob navigácie naprieč celým systémom.
+
+Na obrázku č.~\ref{figmavizual} je zobrazený výrez z konceptuálneho návrhu podstránky \textit{Písať test}, ktorý bol súčasťou úvodného vizuálneho návrhu. V porovnaní s finálnou implementáciou prešli niektoré prvky úpravami zameranými na lepšiu prehľadnosť, responzívnosť a používateľskú použiteľnosť.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=16cm]{img/figma_screen.png}
+  \caption{Výrez z konceptuálneho návrhu podstránky Písať test.}
+  \label{figmavizual}
+\end{figure} 
+
+
+
+
  \section{Implementacia webovej aplikacie}
  tu sa rozpiseme o tom ze sme pozuivali grafy apexcharts dam tam kod, dam kod o generovani uloh, dam tam kod o tom ako sa vsetko pre parsuje a spracovava do DB ked pridavas novu uluhu 
