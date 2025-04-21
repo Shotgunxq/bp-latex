@@ -310,6 +310,73 @@ Komunikácia medzi frontendom a backendom je sprostredkovaná prostredníctvom t
  Observables umožňujú efektívne pracovať s dátovými tokmi, ako sú napríklad \acrshort{http} požiadavky alebo používateľské vstupy, pričom poskytujú pokročilé možnosti ako je reaktívne spracovanie dát, zrušenie požiadaviek, spájanie viacerých streamov alebo transformácia údajov. 
  Vďaka tejto reaktívnej paradigme dokáže aplikácia flexibilne reagovať na zmeny v dátach a zvyšuje sa jej interaktivita, výkon a stabilita.
 
+
+\subsection{Špecifikácia}
+Primárnym cieľom našej webovej aplikácie je poskytnúť efektívnu a modernú platformu pre študentov, ktorí si chcú prehĺbiť svoje znalosti z matematiky, špeciálne z oblasti teórie pravdepodobnosti.
+ V reakcii na obmedzenia a nedostatky súčasných vzdelávacích systémov a aplikácií je naša platforma navrhnutá tak, aby nebola len nástrojom na tvorbu a vyhodnocovanie testov, ale zároveň poskytovala interaktívne študijné materiály a vizualizácie, ktoré zlepšujú pochopenie teoretických konceptov.
+
+Aplikácia kladie dôraz na rozdelenia pravdepodobnosti, pričom podporuje diskrétne rozdelenia ako rovnomerné, binomické, hypergeometrické, poissonovo a geometrické rozdelenie.
+ Každé z rozdelení je v aplikácii reprezentované interaktívnymi vizualizáciami a príkladmi, čo študentom umožňuje lepšie porozumieť danej problematike.
+
+Systém zároveň rozlišuje dve hlavné role používateľov – rolu \textit{študenta} a rolu \textit{administrátora (učiteľa)}. Každá z týchto rolí disponuje špecifickými funkcionalitami, ktoré sú prístupné iba na základe autentifikácie používateľa.
+ Študentom aplikácia umožňuje prístup k študijným materiálom, generovanie testov a sledovanie svojho pokroku.
+  Administrátori majú k dispozícii rozšírené možnosti správy obsahu, vrátane tvorby testov, ako aj monitorovania aktivít a pokroku jednotlivých študentov.
+
+  Pre systematické znázornenie interakcií použivateľov so systémom, sú vytvorené diagramy prípadov použitia zvlášť pre rolu študenta (obrázok č. ~\ref{studentdiagram}) a administrátora (obrázok č. ~\ref{admindiagram}), ktoré ú súčasťou ďalších kapitol tejto práce.
+
+\subsection{Funkcionálne požiadavky}
+Funkcionálne požiadavky sú špecifikácie, ktoré definujú, čo by systém mal robiť a aké funkcie by mal poskytovať používateľom.
+ Tieto požiadavky sa zameriavajú na konkrétne správanie systému, interakcie s používateľmi a spracovanie údajov. 
+ V našej aplikácii sme identifikovali nasledujúce funkcionálne požiadavky pre študentov a administrátorov:
+ \subsubsection{Pre študentov}
+ \begin{itemize}
+   \item Prihlásenie do systému pomocou \acrshort{ldap} autentifikácie.
+   \item Prehliadanie študijných materiálov z oblasti pravdepodobnosti a štatistiky.
+   \item Generovanie testov podľa vybraných tém.
+   \item Riešenie úloh v rámci testovej sady s možnosťou využitia nápoved.
+   \item Zobrazenie výsledkov testov vrátane získaného počtu bodov a použitých nápoved.
+   \item Sledovanie vlastného pokroku a úspešnosti pri riešení úloh.
+   \item Export testových úloh a výsledkov vo formáte vhodnom na uloženie alebo tlač.
+ \end{itemize}
+ 
+\subsubsection{Pre administrátorov (učiteľov)}
+\begin{itemize}
+  \item Prihlásenie do systému pomocou \acrshort{ldap} autentifikácie ako učiteľ.
+\item Zobrazovanie výsledkov všetkých študentov.
+\item Prístup k všeobecným štatistikám a analýzam výkonnosti.
+\item Pridávanie novúch testoých úloh.
+\item Správa existujúcich testových úloh vrátane ich úpravy a mazania.
+\item Zobrazovanie histórie testov a pokroku jednotlivých študentov.
+  \end{itemize}
+
+\subsection{Nefunkcionálne požiadavky}
+Nefunkcionálne požiadavky sú špecifikácie, ktoré sa zameriavajú na vlastnosti a kvalitu systému, ako sú výkon, bezpečnosť, použiteľnosť a údržba.
+ Tieto požiadavky sa netýkajú konkrétnych funkcií, ale skôr toho, ako by mal systém fungovať a aké vlastnosti by mal mať. 
+ V našej aplikácii sme identifikovali nasledujúce nefunkcionálne požiadavky:
+ \begin{itemize} \item Jednoduchosť a prehľadnosť používateľského rozhrania – rozhranie musí byť intuitívne, prispôsobené aj menej technicky zdatným používateľom. \item Spoľahlivé a overené študijné materiály – obsah aplikácie je čerpaný z dôveryhodných odborných zdrojov. \item Optimalizácia aplikácie – systém je navrhnutý s dôrazom na efektívne využívanie zdrojov a minimálnu záťaž pre klienta aj server. \item Rýchla odozva pri generovaní testov a spracovaní výsledkov – činnosti musia byť vykonané v čo najkratšom čase bez zbytočného čakania. \item Dostupnosť systému – aplikácia by mala byť dostupná kedykoľvek, bez výpadkov alebo obmedzení. \item Bezpečnosť dát – všetky používateľské dáta a výsledky musia byť bezpečne uložené a chránené pred neoprávneným prístupom. \item Podpora rôznych zariadení – aplikácia musí byť plne funkčná na počítačoch, tabletoch aj mobilných zariadeniach. \item Modulárnosť a rozšíriteľnosť systému – systém je navrhnutý tak, aby bolo možné v budúcnosti pridávať nové moduly, úlohy či témy bez nutnosti zásahu do existujúceho jadra aplikácie. \end{itemize}
+
+
+ \subsection{Diagramy prípadov použitia}
+\subsubsection{Diagramy prípadov použitia pre študenta}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{img/diagram_student.png}
+  \caption{Diagram prípadov použitia pre študenta.}
+  \label{studentdiagram}
+\end{figure}
+
+
+
+\subsubsection{Diagramy prípadov použitia pre administrátora}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{img/diagram_admin.png}
+  \caption{Diagram prípadov použitia pre administrátora.}
+  \label{admindiagram}
+\end{figure}
+
+
+
  \subsection{Databáza}
  Databázovým systémom našej webovej aplikácie je PostgreSQL, ktorý sme si zvolili pre jeho flexibilnú prácu s dátami. 
  Využívame najmä podporu pre JSONB, ktorá nám umožňuje efektívne ukladať a vyhľadávať polostruktúrované dáta, ako sú odpovede či nápovedy.
@@ -361,53 +428,6 @@ Príklad zápisu jednej úlohy s použitím LaTeX zápisu je znázornený na obr
   \label{latexpriklad}
 \end{figure}
 
-\subsection{Špecifikácia}
-proste o tom ze jake funkcionality su, prebiehe to cez api a blabla dalej definujeme poziadavky
-rozozname dve role - student a admin 
-dame si tu obrazok diagram pripadov pouzitia, co je vlastne to co sme robili v praci
-\subsubsection{Požiadavky na systém}
-
-
-\subsection{Funkcionálne požiadavky}
-Funkcionálne požiadavky sú špecifikácie, ktoré definujú, čo by systém mal robiť a aké funkcie by mal poskytovať používateľom.
- Tieto požiadavky sa zameriavajú na konkrétne správanie systému, interakcie s používateľmi a spracovanie údajov. 
- V našej aplikácii sme identifikovali nasledujúce funkcionálne požiadavky:
-\begin{itemize}
-  \item Používateľská autentifikácia a autorizácia prostredníctvom \acrshort{ldap}.
-  \item Zobrazenie zoznamu úloh a ich kategorizácia podľa tém.
-  \item Možnosť vytvoriť testovú sadu z existujúcich úloh alebo automaticky generovaných úloh.
-  \item Riešenie úloh v testovej sade s možnosťou využitia nápoved.
-  \item Uloženie výsledkov testu do databázy vrátane počtu bodov a použitých nápoved.
-  \item Zobrazenie štatistík o úspešnosti riešenia úloh a testov.
-  \item Možnosť správy úloh a testov zo strany administrátora (učiteľa).
-  \item Zabezpečenie prístupu k funkciám aplikácie na základe rolí používateľov (študent, administrátor).
-  \item Možnosť zdieľať úlohy a testy medzi používateľmi.
-  \item Zabezpečenie ochrany osobných údajov a citlivých informácií používateľov.
-  \item Zabezpečenie ochrany pred neoprávneným prístupom a útokmi na systém.
-  \item Zabezpečenie dostupnosti a spoľahlivosti systému.
-  \item Zabezpečenie škálovateľnosti systému pre rastúci počet používateľov a úloh.
-  \item Zabezpečenie jednoduchého a intuitívneho používateľského rozhrania.
-  \item Zabezpečenie podpory pre rôzne zariadenia a prehliadače.
-  \item Zabezpečenie možnosti prispôsobenia používateľského rozhrania podľa preferencií používateľov.
-  \item Zabezpečenie možnosti exportu a importu úloh a testov.
-  \item Zabezpečenie možnosti integrácie s inými systémami a nástrojmi.
-  \end{itemize}
-
-\subsection{Nefunkcionálne požiadavky}
-Nefunkcionálne požiadavky sú špecifikácie, ktoré sa zameriavajú na vlastnosti a kvalitu systému, ako sú výkon, bezpečnosť, použiteľnosť a údržba.
- Tieto požiadavky sa netýkajú konkrétnych funkcií, ale skôr toho, ako by mal systém fungovať a aké vlastnosti by mal mať. 
- V našej aplikácii sme identifikovali nasledujúce nefunkcionálne požiadavky:
- \begin{itemize}
-  \item Výkon: Systém by mal byť schopný spracovať viac ako 1000 súčasných používateľov bez výrazného zníženia výkonu.
-  \item Bezpečnosť: Systém by mal zabezpečiť ochranu osobných údajov a citlivých informácií používateľov, ako aj ochranu pred neoprávneným prístupom a útokmi.
-  \item Použiteľnosť: Systém by mal mať jednoduché a intuitívne používateľské rozhranie, ktoré umožňuje rýchlu orientáciu a efektívne vykonávanie úloh.
-  \item Údržba: Systém by mal byť navrhnutý tak, aby bol ľahko udržiavateľný a rozšíriteľný, čo znamená, že nové funkcie a vylepšenia by mali byť jednoduché na implementáciu.
-  \item Dostupnosť: Systém by mal byť dostupný 24/7 s minimálnym výpadkom.
-  \item Škálovateľnosť: Systém by mal byť schopný rásť s počtom používateľov a úloh bez potreby zásadných zmien v architektúre.
-  \item Kompatibilita: Systém by mal byť kompatibilný s rôznymi zariadeniami a prehliadačmi.
-  \item Zabezpečenie prístupu: Systém by mal zabezpečiť prístup k funkciám na základe rolí používateľov (študent, administrátor).
-  \item Zálohovanie a obnova: Systém by mal mať mechanizmy na pravidelné zálohovanie údajov a ich obnovu v prípade zlyhania.
- \end{itemize}
 
  \section{Implementacia webovej aplikacie}
  tu sa rozpiseme o tom ze sme pozuivali grafy apexcharts dam tam kod, dam kod o generovani uloh, dam tam kod o tom ako sa vsetko pre parsuje a spracovava do DB ked pridavas novu uluhu 
