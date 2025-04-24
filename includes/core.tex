@@ -108,7 +108,7 @@ jQuery je open-source knižnica napísaná v JavaScripte, ktorá uľahčuje prá
   Aj napriek tomu, že je dnes považovaná za technicky zastaranú a dátovo náročnú, stále sa používa na mnohých weboch vďaka svojej jednoduchosti a veľkému množstvu dostupných pluginov.\cite{jquery}
 
 
- \subsubsection{TypeScript}
+ \subsubsection{java}
 TypeScript \cite{TypeScript} je programovací jazyk vyvinutý spoločnosťou Microsoft, ktorý rozširuje možnosti JavaScriptu pridaním statického typovania a pokročilých objektovo orientovaných prvkov.
  Tým umožňuje vývojárom identifikovať chyby už počas vývoja, čo zvyšuje spoľahlivosť a udržiavateľnosť kódu.
   TypeScript je nadmnožinou JavaScriptu, čo znamená, že všetok platný kód v JavaScripte je kompatibilný s TypeScriptom.
@@ -569,71 +569,143 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
 
 \subsection{Backend}
 
- Brew- alebo iny packaet manager
- Nvm
+ 
  Node
  CORS kvoli json
- LDAP
  Nginx
  Express
- express session - auth guard
- passport saml
- passport
+
  body parser
  CURL veci
+
  \subsubsection{Autentifikácia}
- \subsubsection{Autentifikácia}
 
-V rámci autentifikácie používateľov sme využili \textbf{LDAP} (Lightweight Directory Access Protocol), ktorý je bežne používaný na univerzitách a vo väčších organizáciách ako centralizovaný systém na správu identity. Našim cieľom bolo napojiť sa na akademický LDAP server a overiť prihlasovacie údaje študentov a pedagógov.
+ Prihlasovanie používateľov v aplikácii je riešené pomocou \textbf{LDAP autentifikácie}, pričom aplikácia komunikuje s akademickým LDAP serverom \texttt{ldap.stuba.sk}. Na overenie prihlasovacích údajov využívame knižnicu \texttt{ldap-authentication}, ktorá zabezpečuje jednoduché pripojenie a autentifikáciu voči vzdialenému LDAP serveru. Knižnica má ako závislosť \texttt{ldapjs}, ktorá realizuje nízkoúrovňovú komunikáciu.
+ 
+ Samotná autentifikácia je realizovaná pomocou nasledovnej asynchrónnej funkcie:
+ 
+ \begin{lstlisting}[
+   caption={Funkcia na autentifikáciu používateľa cez LDAP},
+   label={lst:ldap-auth},
+   language=java,
+   style=code-listing
+ ]
+ async function ldapAuth(username, password) {
+   try {
+     const options = {
+       ldapOpts: { url: 'ldap://ldap.stuba.sk' },
+       userDn: `uid=${username},ou=People,dc=stuba,dc=sk`,
+       userPassword: password,
+       userSearchBase: 'ou=People,dc=stuba,dc=sk',
+       usernameAttribute: 'uid',
+       username: username,
+     };
+ 
+     return await authenticate(options);
+   } catch (error) {
+     throw new Error('LDAP bind failed: ' + error.message);
+   }
+ }
+ \end{lstlisting}
+ 
+ Na strane backendu používame knižnicu \texttt{express-session}, ktorá nám umožňuje uchovávať informáciu o prihlásenom používateľovi v rámci session. Týmto spôsobom vieme zabezpečiť, že používateľ ostane prihlásený aj pri opakovanej návšteve stránky počas aktívnej relácie.
+ 
+ Po úspešnej autentifikácii sa vytvorí zjednodušený objekt používateľa, ktorý sa uloží do databázy (ak ešte neexistuje), a zároveň sa uloží do session nasledovne:
+ 
+ \begin{lstlisting}[
+   caption={Spracovanie prihlasovania a uloženie používateľa do session},
+   label={lst:login-session},
+   language=java,
+   style=code-listing
+ ]
+ app.post('/login', async (req, res) => {
+   const { username, password } = req.body;
+   try {
+     const user = await ldapAuth(username, password);
+     const processedUser = {
+       userId: user.uisId,
+       employeeType: user.employeeType,
+       givenName: user.givenName,
+       lastName: user.sn,
+       email: user.mailLocalAddress[1],
+     };
+ 
+     // Insert into DB if new
+     try {
+       const existing = await db.findUserById(processedUser.userId);
+       if (!existing) {
+         await db.insertUser(processedUser);
+       }
+     } catch (dbErr) {
+       console.error('DB error:', dbErr.message);
+     }
+ 
+     // Save user to session
+     req.session.user = processedUser;
+     res.status(200).json(processedUser);
+   } catch (err) {
+     res.status(401).json({ error: 'Authentication failed: ' + err.message });
+   }
+ });
+ \end{lstlisting}
+ 
+ \paragraph{Ochrana súkromných a administrátorských rout na strane frontendu}
 
-Na implementáciu autentifikácie sme využili knižnicu \textbf{ldap-authentication}, ktorá poskytuje jednoduché API na overenie prihlasovacích údajov voči LDAP serveru. 
-Táto knižnica závisí od balíčka \texttt{ldapjs}, ktorý zabezpečuje nízkoúrovňovú komunikáciu so serverom, a preto je potrebné nainštalovať obe knižnice pomocou nasledovného príkazu:
+Na strane klienta (v Angulari) využívame vlastný súbor \texttt{auth.guard.ts}, ktorý zabezpečuje, že k určitým stránkam aplikácie má prístup iba autentifikovaný používateľ. Tento guard je súčasťou smerovania (routing) a overuje, či existuje používateľ v úložisku \texttt{sessionStorage}. Ak nie, používateľ je automaticky presmerovaný na prihlasovaciu stránku.
 
-\begin{verbatim}
-npm install ldap-authentication ldapjs
-\end{verbatim}
-
-Pre udržanie stavu prihlásenia používateľa po úspešnej autentifikácii sme využili session mechanizmus, ktorý je implementovaný prostredníctvom knižnice \textbf{express-session}. 
-Tento balík umožňuje uchovávať informácie o prihlásenom používateľovi medzi jednotlivými požiadavkami bez nutnosti opätovného prihlasovania pri každej interakcii s aplikáciou.
-
-\begin{verbatim}
-npm install express-session
-\end{verbatim}
-
-\bigskip
-Na nasledujúcom výpise uvádzame zjednodušený príklad autentifikačného procesu pomocou \texttt{ldap-authentication} a ukladania relácie pomocou \texttt{express-session}:
+Okrem toho tento guard podporuje aj kontrolu rolí používateľov. Pomocou atribútu \texttt{expectedEmployeeType} v definícii trasy vieme zabezpečiť, že niektoré stránky (napr. administrátorské) budú dostupné len používateľom s určitou rolou (napr. \texttt{admin}).
 
 \begin{lstlisting}[
-  caption={Ukážka funkcie na autentifikáciu používateľa pomocou LDAP},
-  label={lst:ldap-auth},
+  caption={Implementácia AuthGuard v Angulari},
+  label={lst:auth-guard},
   language=java,
   style=code-listing
 ]
-async function ldapAuth(username, password) {
-  try {
-    const options = {
-      ldapOpts: { url: 'ldap://ldap.stuba.sk' },
-      userDn: `uid=${username},ou=People,dc=stuba,dc=sk`,
-      userPassword: password,
-      userSearchBase: 'ou=People,dc=stuba,dc=sk',
-      usernameAttribute: 'uid',
-      username: username,
-    };
+canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  const user = this.apiService.getUserFromStorage();
 
-    const user = await authenticate(options);
-    return user;
-  } catch (error) {
-    throw new Error('LDAP bind failed: ' + error.message);
+  if (!user) {
+    this.router.navigate(['/']);
+    return false;
   }
+
+  const expectedEmployeeType = route.data['expectedEmployeeType'];
+  if (expectedEmployeeType && user.employeeType !== expectedEmployeeType) {
+    this.router.navigate(['/menu']);
+    return false;
+  }
+
+  return true;
 }
 \end{lstlisting}
 
+Definícia ciest sa nachádza v súbore \texttt{app-routing.module.ts}, kde sa pomocou \texttt{canActivate} zabezpečuje ochrana jednotlivých komponentov. Ako môžeme vidieť na príklade nižšie, každá trasa, ktorá vyžaduje prihlásenie, je chránená pomocou \texttt{AuthGuard}. Pre admin rozhrania je navyše špecifikovaný parameter \texttt{expectedEmployeeType}, čo zabezpečuje aj kontrolu oprávnení.
 
-\bigskip
-V tomto príklade dochádza k overeniu údajov používateľa voči externému LDAP serveru. V prípade úspešného prihlásenia sa výsledný objekt používateľa uloží do session, čím sa zabezpečí, že používateľ ostane prihlásený aj pri ďalších požiadavkách.
+\begin{lstlisting}[
+  caption={Definícia rout v Angulari s ochranou pomocou AuthGuard},
+  label={lst:routing},
+  language=java,
+  style=code-listing
+]
+const routes: Routes = [
+  { path: '', component: LoginModalComponent },
+  { path: 'menu', component: MenuPageComponent, canActivate: [AuthGuard] },
+  { path: 'test', component: TestCreationComponent, canActivate: [AuthGuard] },
+  { path: 'stats', component: StatsPageComponent, canActivate: [AuthGuard] },
+  { path: 'done', component: TestDoneComponent, canActivate: [AuthGuard] },
+  { path: 'mats', component: MaterialsPageComponent, canActivate: [AuthGuard] },
+  { path: 'test-writing', component: TestWritingComponent, canActivate: [AuthGuard] },
+  { path: 'export', component: ExportPageComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard], data: { expectedEmployeeType: 'admin' } },
+  { path: 'admin/statistics', component: AdminStatisticsComponent, canActivate: [AuthGuard], data: { expectedEmployeeType: 'admin' } },
+  { path: '**', redirectTo: '' },
+];
+\end{lstlisting}
 
-Pre zabezpečenie ochrany citlivých údajov odporúčame pri nasadení do produkcie zabezpečiť aplikáciu HTTPS protokolom a nastaviť parametre \texttt{cookie.secure} a \texttt{cookie.httpOnly}.
+Týmto spôsobom zabezpečujeme na klientovi, že sa na súkromné alebo administrátorské stránky dostane iba oprávnený používateľ s platným session údajom, čím zvyšujeme bezpečnosť aplikácie.
 
+ 
+ 
 
  \subsubsection{Posielanie dat ????}
 
