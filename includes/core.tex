@@ -571,12 +571,61 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
 
  
  Node
- CORS kvoli json
  Nginx
- Express
 
- body parser
  CURL veci
+ \section{TODO: TOTO OPRAVIT, pridat tu command line instally, viac ludsky napisat, nedat tu nejake privitanie lebo sme uz o tom pisali hore}
+
+ \paragraph{Inštalácia a použitie Express frameworku}
+
+Serverová časť aplikácie je postavená na frameworku \textbf{Express.js}, ktorý je jedným z najpoužívanejších nástrojov na tvorbu webových a REST API serverov v prostredí Node.js. Inštalácia Expressu je jednoduchá a vykonáva sa pomocou balíčkovacieho nástroja \acrshort{npm} príkazom:
+
+\begin{verbatim}
+npm install express
+\end{verbatim}
+
+Po úspešnej inštalácii je možné vytvoriť základný server a definovať vlastné API routy. V projekte je logika rozdelená do tzv. \textbf{servisných tried} (services), ktoré abstrahujú jednotlivé domény funkcionality – napríklad práca s testami, používateľmi alebo štatistikami. Tieto triedy slúžia ako rozhranie medzi routou a databázovou logikou. Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry backendu so zameraním na jednotlivé služby.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=13cm]{img/backend-services.png}
+  \caption{Ukážka štruktúry backendových služieb v aplikácii.}
+  \label{fig:backend-services}
+\end{figure}
+
+\bigskip
+Na to, aby frontend mohol komunikovať s backendom, je potrebné povoliť prístup medzi rôznymi doménami (napr. frontend beží na \texttt{http://localhost:4200} a backend na \texttt{http://localhost:3000}). Na tento účel sme použili knižnicu \textbf{CORS} (\textit{Cross-Origin Resource Sharing}), ktorá bola nakonfigurovaná nasledovne:
+
+\begin{lstlisting}[
+  caption={Konfigurácia CORS pre komunikáciu medzi FE a BE},
+  label={lst:cors-config},
+  language=java,
+  style=code-listing
+]
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true
+}));
+\end{lstlisting}
+
+Bez tejto konfigurácie by prehliadač blokoval požiadavky medzi rôznymi portmi alebo doménami, čo by znemožnilo komunikáciu medzi frontendom a backendom.
+
+\bigskip
+Na správne spracovanie dát typu \texttt{application/json}, ktoré odosiela Angular prostredníctvom POST alebo PUT požiadaviek, sme použili middleware \textbf{body-parser}. Tento middleware zabezpečí, že JSON objekt v tele požiadavky bude automaticky spracovaný a dostupný cez \texttt{req.body}. Je to obzvlášť dôležité pri práci s databázou PostgreSQL, kde používame dátový typ \texttt{JSONB}.
+
+\begin{lstlisting}[
+  caption={Použitie body-parser pre spracovanie JSON požiadaviek},
+  label={lst:body-parser},
+  language=java,
+  style=code-listing
+]
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+\end{lstlisting}
+
+Týmto nastavením zabezpečíme, že každý JSON payload zo strany klienta bude backendom správne spracovaný a následne uložený do databázy vo formáte \texttt{JSONB}.
+
 
  \subsubsection{Autentifikácia}
 
