@@ -460,23 +460,115 @@ Navigácia v aplikácii je zabezpečená pomocou horného navigačného panela, 
 
 Na obrázku č.~\ref{figmavizual} je zobrazený výrez z konceptuálneho návrhu podstránky \textit{Písať test}, ktorý bol súčasťou úvodného vizuálneho návrhu. V porovnaní s finálnou implementáciou prešli niektoré prvky úpravami zameranými na lepšiu prehľadnosť, responzívnosť a používateľskú použiteľnosť.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=16cm]{img/figma_screen.png}
   \caption{Výrez z konceptuálneho návrhu podstránky Písať test.}
   \label{figmavizual}
 \end{figure} 
 
-\subsection{Generovanie úloh}
-kód
-\subsection{Interaktivne grafy}
-kód
+\subsection{Preskúšanie sa}
+\subsubsection{Gamifikacia}
+\subsubsection{Generovanie úloh}
+\subsection{Materialy}
+\subsubsection{Interaktivne grafy}
+\subsection{Vytváranie úloh (Admin)}
+
+\subsection{Vyhodnocovanie úloh}
 
 
 
  \section{Implementacia webovej aplikacie}
- tu sa rozpiseme o tom ze sme pozuivali grafy apexcharts dam tam kod, dam kod o generovani uloh, dam tam kod o tom ako sa vsetko pre parsuje a spracovava do DB ked pridavas novu uluhu 
- \subsection{Backend}
+ V tejto kapitole sa podrobne venujeme implementačnej časti webovej aplikácie, pričom rozdeľujeme jednotlivé aspekty systému na backend, frontend a databázovú vrstvu.
+  Cieľom tejto časti je ukázať, ako boli teoretické návrhy z predchádzajúcej kapitoly pretavené do konkrétnej technickej realizácie.
+
+ V jednotlivých sekciách prezentujeme použité technológie a knižnice, ako aj konkrétne časti zdrojového kódu ilustrujúce dôležité funkcionality, 
+ ako napríklad generovanie úloh, vizualizácie dát pomocou grafov alebo spracovanie používateľského vstupu pri pridávaní nových otázok do databázy.
+
+ \subsection{Vývojové prostredie a inštalácia závislostí}
+
+ Počas vývoja webovej aplikácie sme využívali vývojové prostredie \textbf{Visual Studio Code}\cite{vscode}, ktoré poskytuje množstvo rozšírení vhodných pre vývoj v JavaScripte a TypeScripte, ako aj nástroje na efektívnu správu projektovej štruktúry, ladenie a kontrolu syntaxe.
+ 
+ Backendová časť aplikácie bola postavená na platforme \textbf{Node.js}, ktorá umožňuje spúšťanie JavaScriptového kódu na strane servera. Na správu knižníc a závislostí sme používali \acrfull{npm}, ktorý je súčasťou štandardnej inštalácie Node.js. 
+ Pomocou neho boli do projektu inštalované všetky potrebné knižnice, ako napríklad \texttt{express}, \texttt{passport}, \texttt{body-parser}, \texttt{cors} a ďalšie.
+  
+ Závislosti boli definované v súbore \texttt{package.json}, ktorý slúži zároveň ako dokumentačný a konfiguračný súbor pre projekt. Samotná inštalácia všetkých závislostí sa vykoná príkazom:
+ 
+ \begin{verbatim}
+ npm install
+ \end{verbatim}
+ 
+ Týmto príkazom sa automaticky stiahnu všetky knižnice uvedené v súbore \texttt{package.json} a pripravia sa na použitie v projekte.
+ 
+ \subsection{Frontend – Angular}
+
+Frontendová časť aplikácie bola implementovaná pomocou frameworku \textbf{Angular}, ktorý je postavený na TypeScripte a poskytuje robustnú architektúru pre budovanie komplexných single-page aplikácií (SPA).
+ Angular ponúka množstvo výhod ako je komponentovo orientovaný vývoj, dvojcestná väzba dát, modulárnosť a rozsiahla komunita s kvalitnou dokumentáciou.
+
+\bigskip
+Na to, aby sme mohli Angular používať, je potrebné mať nainštalovaný \textbf{Node.js} a s ním aj správcu balíkov \acrshort{npm}, ktoré sme spomínali v predchádzajúcej sekcii. 
+Po ich nainštalovaní je možné Angular \acrshort{cli} nainštalovať globálne\footnote{Prepínač \textit{-g} znamená globálnu inštaláciu, čím získame prístup ku príkazu \textit{ng} v ktoromkoľvek priečinku systému.}
+pomocou príkazu:
+
+\begin{verbatim}
+npm install -g @angular/cli
+\end{verbatim}
+
+Správnu inštaláciu Angularu môžeme overiť pomocou príkazu:
+
+\begin{verbatim}
+ng version
+\end{verbatim}
+
+Výstup z tohto príkazu zobrazí verziu Angular \acrshort{cli}, ako aj verzie jednotlivých komponentov Angularu. Na obrázku~\ref{fig:ng-version} je znázornený výstup z tohto príkazu v termináli\footnote{Terminál vo Visual Studio Code predstavuje integrované rozhranie pre prácu s príkazovým riadkom priamo v editore.}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{img/ng-version.png}
+  \caption{Výstup príkazu \texttt{ng version} v termináli.}
+  \label{fig:ng-version}
+\end{figure}
+
+\bigskip
+Nový Angular projekt môžeme vytvoriť pomocou príkazu:
+
+\begin{verbatim}
+ng new angular-app
+\end{verbatim}
+
+Tento príkaz vygeneruje základnú adresárovú štruktúru aplikácie, vrátane konfiguračných súborov, ako je napríklad \texttt{angular.json}, \texttt{package.json}, a priečinkov \texttt{src/}, \texttt{app/} a ďalších. Po úspešnom vytvorení projektu môžeme aplikáciu spustiť príkazom:
+
+\begin{verbatim}
+ng serve
+\end{verbatim}
+
+Týmto príkazom sa automaticky nainštalujú všetky závislosti zo súboru \texttt{package-lock.json} a vytvorí sa priečinok \texttt{node\_modules}, ktorý obsahuje všetky knižnice potrebné na beh aplikácie.
+ Aplikácia je následne dostupná na adrese \texttt{http://localhost:4200}.
+
+Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová štruktúra Angular projektu po vytvorení.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6cm]{img/angular-structure.png}
+  \caption{Základná štruktúra Angular projektu.}
+  \label{fig:angular-structure}
+\end{figure}
+
+\subsubsection{Graficka cast tejto PICOVINY}
+ RxJS
+ node-sass kvoli renderovaniu
+ apex charts - lazy loading
+ math jax 
+ chart.js 
+ mathquill
+ jQuery
+ pdfmake
+ Bootstrap
+ bootstrap animation
+ freedsound.org
+
+\subsection{Backend}
+
  Brew- alebo iny packaet manager
  Nvm
  Node
@@ -489,19 +581,9 @@ kód
  passport
  body parser
  CURL veci
- \subsection{Frontend}
- angular
- RxJS
- node-sass kvoli renderovaniu
- apex charts - lazy loading
- math jax 
- chart.js 
- mathquill
- jQuery
- pdfmake
- Bootstrap
- bootstrap animation
- freedsound.org
+ \subsubsection{Autentifikácia}
+ \subsubsection{Posielanie dat ????}
+
  
  \subsection{DB}
  prepajanie
