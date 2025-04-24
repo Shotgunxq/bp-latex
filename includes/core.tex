@@ -582,6 +582,59 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
  body parser
  CURL veci
  \subsubsection{Autentifikácia}
+ \subsubsection{Autentifikácia}
+
+V rámci autentifikácie používateľov sme využili \textbf{LDAP} (Lightweight Directory Access Protocol), ktorý je bežne používaný na univerzitách a vo väčších organizáciách ako centralizovaný systém na správu identity. Našim cieľom bolo napojiť sa na akademický LDAP server a overiť prihlasovacie údaje študentov a pedagógov.
+
+Na implementáciu autentifikácie sme využili knižnicu \textbf{ldap-authentication}, ktorá poskytuje jednoduché API na overenie prihlasovacích údajov voči LDAP serveru. 
+Táto knižnica závisí od balíčka \texttt{ldapjs}, ktorý zabezpečuje nízkoúrovňovú komunikáciu so serverom, a preto je potrebné nainštalovať obe knižnice pomocou nasledovného príkazu:
+
+\begin{verbatim}
+npm install ldap-authentication ldapjs
+\end{verbatim}
+
+Pre udržanie stavu prihlásenia používateľa po úspešnej autentifikácii sme využili session mechanizmus, ktorý je implementovaný prostredníctvom knižnice \textbf{express-session}. 
+Tento balík umožňuje uchovávať informácie o prihlásenom používateľovi medzi jednotlivými požiadavkami bez nutnosti opätovného prihlasovania pri každej interakcii s aplikáciou.
+
+\begin{verbatim}
+npm install express-session
+\end{verbatim}
+
+\bigskip
+Na nasledujúcom výpise uvádzame zjednodušený príklad autentifikačného procesu pomocou \texttt{ldap-authentication} a ukladania relácie pomocou \texttt{express-session}:
+
+\begin{lstlisting}[
+  caption={Ukážka funkcie na autentifikáciu používateľa pomocou LDAP},
+  label={lst:ldap-auth},
+  language=java,
+  style=code-listing
+]
+async function ldapAuth(username, password) {
+  try {
+    const options = {
+      ldapOpts: { url: 'ldap://ldap.stuba.sk' },
+      userDn: `uid=${username},ou=People,dc=stuba,dc=sk`,
+      userPassword: password,
+      userSearchBase: 'ou=People,dc=stuba,dc=sk',
+      usernameAttribute: 'uid',
+      username: username,
+    };
+
+    const user = await authenticate(options);
+    return user;
+  } catch (error) {
+    throw new Error('LDAP bind failed: ' + error.message);
+  }
+}
+\end{lstlisting}
+
+
+\bigskip
+V tomto príklade dochádza k overeniu údajov používateľa voči externému LDAP serveru. V prípade úspešného prihlásenia sa výsledný objekt používateľa uloží do session, čím sa zabezpečí, že používateľ ostane prihlásený aj pri ďalších požiadavkách.
+
+Pre zabezpečenie ochrany citlivých údajov odporúčame pri nasadení do produkcie zabezpečiť aplikáciu HTTPS protokolom a nastaviť parametre \texttt{cookie.secure} a \texttt{cookie.httpOnly}.
+
+
  \subsubsection{Posielanie dat ????}
 
  
