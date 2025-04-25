@@ -468,8 +468,39 @@ Na obrázku č.~\ref{figmavizual} je zobrazený výrez z konceptuálneho návrhu
 \end{figure} 
 
 \subsection{Preskúšanie sa}
-\subsubsection{Gamifikacia}
+
+Súčasťou navrhovanej webovej aplikácie je stránka umožňujúca používateľom vytvárať vlastné testovacie sady úloh na precvičenie a preverenie vedomostí z oblasti pravdepodobnosti a štatistiky. Používateľské rozhranie tejto stránky (obrázok~\ref{fig:test-creation}) bolo navrhnuté tak, aby bolo intuitívne a aby zabezpečovalo príjemnú používateľskú skúsenosť (UX).
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=14cm]{img/test-creation.png}
+  \caption{Používateľské rozhranie stránky pre vytvorenie testovacej sady.}
+  \label{fig:test-creation}
+\end{figure}
+
+Na tejto stránke má používateľ možnosť presne definovať parametre generovaného testu, ako napríklad:
+
+\begin{itemize}
+  \item \textbf{Výber tém} – používateľ si môže označiť matematické témy, z ktorých chce byť testovaný. Ide najmä o témy ako pravdepodobnosť a rozdelenia, štatistika a analýza dát, kombinatorika a teória množín, a tiež aplikácie a reálne scenáre.
+  \item \textbf{Typ a obtiažnosť úloh} – umožňuje nastaviť počet ľahkých, stredne ťažkých a ťažkých úloh.
+  \item \textbf{Časový limit} – určuje maximálny čas na vypracovanie celého testu.
+  \item \textbf{Gamifikácia} – voliteľná funkcionalita, ktorej účelom je zvýšiť motiváciu používateľov prostredníctvom herných prvkov, bližšie vysvetlená v nasledujúcej podkapitole.
+\end{itemize}
+
+Po úspešnom vygenerovaní testovej sady je používateľ automaticky presmerovaný na stránku samotného preskúšania (obrázok~\ref{fig:test-in-progress}). Pri návrhu tejto stránky sme kládli dôraz na vizuálnu spätnú väzbu pre používateľa – už zodpovedané úlohy sú jasne vizuálne označené, čím sa zlepšuje prehľadnosť testu. Súčasťou rozhrania je aj stručný popis používania aplikácie, ktorý sa zobrazí kliknutím na príslušnú ikonu s informáciami.
+
+Po uplynutí časového limitu sa používateľovi automaticky zobrazí modálne okno, ktoré informuje o ukončení testu a odoslaní odpovedí na spracovanie a vyhodnotenie.
+
+Na správne a čitateľné vykresľovanie matematických výrazov a rovníc bola použitá JavaScriptová knižnica \textbf{MathJax}. Tá zabezpečuje bezproblémové zobrazenie matematických symbolov a vzorcov priamo vo webovom prehliadači používateľa.
+
+\subsubsection{Gamifikácia}
+
+Podsekcia bude venovaná detailnému opisu gamifikačných prvkov použitých v aplikácii, ich cieľom a spôsobom implementácie. (Obsah bude dopísaný v nasledujúcich krokoch práce.)
+
 \subsubsection{Generovanie úloh}
+
+Táto podsekcia sa venuje technickému procesu generovania úloh pre testy na základe používateľských preferencií, výberu tém a obtiažností. (Obsah bude dopísaný v nasledujúcich krokoch práce.)
+
 \subsection{Materialy}
 \subsubsection{Interaktivne grafy}
 \subsection{Vytváranie úloh (Admin)}
@@ -490,7 +521,7 @@ Na obrázku č.~\ref{figmavizual} je zobrazený výrez z konceptuálneho návrhu
  Počas vývoja webovej aplikácie sme využívali vývojové prostredie \textbf{Visual Studio Code}\cite{vscode}, ktoré poskytuje množstvo rozšírení vhodných pre vývoj v JavaScripte a TypeScripte, ako aj nástroje na efektívnu správu projektovej štruktúry, ladenie a kontrolu syntaxe.
  
  Backendová časť aplikácie bola postavená na platforme \textbf{Node.js}, ktorá umožňuje spúšťanie JavaScriptového kódu na strane servera. Na správu knižníc a závislostí sme používali \acrfull{npm}, ktorý je súčasťou štandardnej inštalácie Node.js. 
- Pomocou neho boli do projektu inštalované všetky potrebné knižnice, ako napríklad \texttt{express}, \texttt{passport}, \texttt{body-parser}, \texttt{cors} a ďalšie.
+ Pomocou neho boli do projektu inštalované všetky potrebné knižnice, ako napríklad \texttt{express}, \texttt{MathQuill}, \texttt{body-parser}, \texttt{cors} a ďalšie.
   
  Závislosti boli definované v súbore \texttt{package.json}, ktorý slúži zároveň ako dokumentačný a konfiguračný súbor pre projekt. Samotná inštalácia všetkých závislostí sa vykoná príkazom:
  
@@ -574,19 +605,37 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
  Nginx
 
  CURL veci
- \section{TODO: TOTO OPRAVIT, pridat tu command line instally, viac ludsky napisat, nedat tu nejake privitanie lebo sme uz o tom pisali hore}
 
  \paragraph{Inštalácia a použitie Express frameworku}
 
-Serverová časť aplikácie je postavená na frameworku \textbf{Express.js}, ktorý je jedným z najpoužívanejších nástrojov na tvorbu webových a REST API serverov v prostredí Node.js. Inštalácia Expressu je jednoduchá a vykonáva sa pomocou balíčkovacieho nástroja \acrshort{npm} príkazom:
+Inštalácia Expressu je jednoduchá a vykonáva sa pomocou balíčkovacieho nástroja \acrshort{npm} príkazom:
 
-\begin{verbatim}
-npm install express
-\end{verbatim}
+\begin{verbatim} npm install express \end{verbatim}
 
-Po úspešnej inštalácii je možné vytvoriť základný server a definovať vlastné API routy. V projekte je logika rozdelená do tzv. \textbf{servisných tried} (services), ktoré abstrahujú jednotlivé domény funkcionality – napríklad práca s testami, používateľmi alebo štatistikami. Tieto triedy slúžia ako rozhranie medzi routou a databázovou logikou. Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry backendu so zameraním na jednotlivé služby.
+Po úspešnej inštalácii je možné vytvoriť základný server a definovať vlastné API routy. Najjednoduchšia implementácia servera môže vyzerať nasledovne:
 
-\begin{figure}[h!]
+\begin{lstlisting}[ caption={Ukážka základnej konfigurácie Express.js servera}, label={lst:basic-express-server}, language=java, style=code-listing ] 
+  const express = require('express'); 
+  const app = express(); 
+  const port = 3000;
+
+app.listen(port, () => { console.log(Server beží na porte ${port}); }); 
+\end{lstlisting}
+
+Tento server môžeme spustiť cez terminál pomocou príkazu:
+
+\begin{verbatim} node server.js \end{verbatim}
+
+kde \texttt{server.js} je názov súboru obsahujúceho uvedený kód. Ak je server úspešne spustený, v konzole sa vypíše správa \uv{Server beží na porte 3000}.
+ V projekte je logika rozdelená do tzv. \textbf{servisných tried} (services), ktoré abstrahujú jednotlivé domény funkcionality – napríklad práca s testami, používateľmi alebo štatistikami. 
+ Tieto triedy slúžia ako rozhranie medzi routou a databázovou logikou. 
+Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry backendu so zameraním na jednotlivé služby.
+
+Tento kód vytvorí základný server, ktorý je pripravený na ďalšie definovanie rout a pridávanie funkcionality.
+ V projekte je logika rozdelená do tzv. \textbf{servisných tried} (services), ktoré abstrahujú jednotlivé domény funkcionality.
+  Tieto triedy slúžia ako rozhranie medzi routou a databázovou logikou.
+ Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry backendu so zameraním na jednotlivé služby.
+\begin{figure}[H]
   \centering
   \includegraphics[width=13cm]{img/backend-services.png}
   \caption{Ukážka štruktúry backendových služieb v aplikácii.}
@@ -757,6 +806,7 @@ Týmto spôsobom zabezpečujeme na klientovi, že sa na súkromné alebo adminis
  
 
  \subsubsection{Posielanie dat ????}
+ tu napiseme o ApiService a o AdminService, a taktiez o autogenerovanych veciach ktore budu ale prepisane na helper servicky 
 
  
  \subsection{DB}
