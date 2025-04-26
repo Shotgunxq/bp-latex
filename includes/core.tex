@@ -469,13 +469,14 @@ Na obrázku č.~\ref{figmavizual} je zobrazený výrez z konceptuálneho návrhu
 
 \subsection{Preskúšanie sa}
 
-Súčasťou navrhovanej webovej aplikácie je stránka umožňujúca používateľom vytvárať vlastné testovacie sady úloh na precvičenie a preverenie vedomostí z oblasti pravdepodobnosti a štatistiky. Používateľské rozhranie tejto stránky (obrázok~\ref{fig:test-creation}) bolo navrhnuté tak, aby bolo intuitívne a aby zabezpečovalo príjemnú používateľskú skúsenosť (UX).
+Súčasťou navrhovanej webovej aplikácie je stránka umožňujúca používateľom vytvárať vlastné testovacie sady úloh na precvičenie a preverenie vedomostí z oblasti pravdepodobnosti a štatistiky.
+ Používateľské rozhranie tejto stránky (obrázok~\ref{test-creation}) bolo navrhnuté tak, aby bolo intuitívne a aby zabezpečovalo príjemnú používateľskú skúsenosť (UX).
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=14cm]{img/test-creation.png}
   \caption{Používateľské rozhranie stránky pre vytvorenie testovacej sady.}
-  \label{fig:test-creation}
+  \label{test-creation}
 \end{figure}
 
 Na tejto stránke má používateľ možnosť presne definovať parametre generovaného testu, ako napríklad:
@@ -487,25 +488,96 @@ Na tejto stránke má používateľ možnosť presne definovať parametre genero
   \item \textbf{Gamifikácia} – voliteľná funkcionalita, ktorej účelom je zvýšiť motiváciu používateľov prostredníctvom herných prvkov, bližšie vysvetlená v nasledujúcej podkapitole.
 \end{itemize}
 
-Po úspešnom vygenerovaní testovej sady je používateľ automaticky presmerovaný na stránku samotného preskúšania (obrázok~\ref{fig:test-in-progress}). Pri návrhu tejto stránky sme kládli dôraz na vizuálnu spätnú väzbu pre používateľa – už zodpovedané úlohy sú jasne vizuálne označené, čím sa zlepšuje prehľadnosť testu. Súčasťou rozhrania je aj stručný popis používania aplikácie, ktorý sa zobrazí kliknutím na príslušnú ikonu s informáciami.
+Po úspešnom vygenerovaní testovej sady je používateľ automaticky presmerovaný na stránku samotného preskúšania (obrázok~\ref{test-writing}). 
+Pri návrhu tejto stránky sme kládli dôraz na vizuálnu spätnú väzbu pre používateľa – už zodpovedané úlohy sú jasne vizuálne označené, čím sa zlepšuje prehľadnosť testu. 
+Súčasťou rozhrania je aj stručný popis používania aplikácie, ktorý sa zobrazí kliknutím na príslušnú ikonu s informáciami.
 
 Po uplynutí časového limitu sa používateľovi automaticky zobrazí modálne okno, ktoré informuje o ukončení testu a odoslaní odpovedí na spracovanie a vyhodnotenie.
 
-Na správne a čitateľné vykresľovanie matematických výrazov a rovníc bola použitá JavaScriptová knižnica \textbf{MathJax}. Tá zabezpečuje bezproblémové zobrazenie matematických symbolov a vzorcov priamo vo webovom prehliadači používateľa.
+Na správne a čitateľné vykresľovanie matematických výrazov a rovníc bola použitá JavaScriptová knižnica \textbf{MathJax}.
+ Tá zabezpečuje bezproblémové zobrazenie matematických symbolov a vzorcov priamo vo webovom prehliadači používateľa.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=14cm]{img/test-writing.png}
+  \caption{Používateľské rozhranie stránky počas priebehu testu.}
+  \label{test-writing}
+\end{figure}
+
+
 
 \subsubsection{Gamifikácia}
 
-Podsekcia bude venovaná detailnému opisu gamifikačných prvkov použitých v aplikácii, ich cieľom a spôsobom implementácie. (Obsah bude dopísaný v nasledujúcich krokoch práce.)
+S cieľom zvýšiť atraktívnosť vzdelávacieho procesu a posilniť motiváciu študentov bola do aplikácie implementovaná \textbf{gamifikácia}, teda využitie herných prvkov v nehernom kontexte. 
+Gamifikačné mechanizmy majú potenciál výrazne zlepšiť angažovanosť študentov, podporiť ich súťaživosť a vytvoriť pozitívne motivujúce prostredie na systematické precvičovanie vedomostí.
 
+V rámci navrhnutej aplikácie sme zaviedli nasledujúce gamifikačné prvky:
+
+\begin{itemize} \item \textbf{Leaderboard (rebríček)} – používatelia získavajú za správne odpovede body, na základe ktorých sa vytvára dynamický rebríček.
+   Umiestnenie používateľa na rebríčku mu poskytuje prehľad o vlastnej výkonnosti v porovnaní s ostatnými študentmi a motivuje ho k ďalšiemu zlepšovaniu.
+
+\item \textbf{Bodový systém s bonusmi} – používateľ získava štandardné body za každú správne zodpovedanú otázku. 
+Okrem toho sú prideľované aj bonusové body za rýchlosť odpovede, čím sa študenti podporujú v efektívnom a rýchlom riešení úloh.
+
+\item \textbf{Vizuálna a zvuková spätná väzba} – aplikácia okamžite reaguje na správne alebo nesprávne odpovede študenta. Vizuálne je táto spätná väzba reprezentovaná farebným označením stavu jednotlivých otázok, pričom je doplnená aj vhodnými zvukovými efektmi. Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=14cm]{img/gamification.png}
+  \caption{Ukážka vizuálnej spätnej väzby v gamifikovanom režime testovania.}
+  \label{fig:gamification-feedback}
+\end{figure}
+
+Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti.
+
+\item \textbf{Nápovedy s penalizáciou} – v prípade, že používateľ potrebuje pomôcť s riešením úloh, má možnosť využiť nápovedu. Tá ho môže nasmerovať k správnemu riešeniu, avšak za každú použitú nápovedu sú používateľovi odpočítané body. Týmto spôsobom podporujeme študentov k samostatnosti a zároveň pridávame do vzdelávania súťažný rozmer. \end{itemize}
+
+Na stránke so štatistikami má študent následne možnosť vidieť, v akom percentile výkonnosti sa nachádza, čo mu poskytuje objektívnu informáciu o jeho relatívnej úspešnosti voči ostatným používateľom aplikácie. Tieto prvky spolu vytvárajú efektívne a interaktívne prostredie, ktoré podporuje kontinuálne vzdelávanie a rozvoj matematických schopností študentov.
 \subsubsection{Generovanie úloh}
 
 Táto podsekcia sa venuje technickému procesu generovania úloh pre testy na základe používateľských preferencií, výberu tém a obtiažností. (Obsah bude dopísaný v nasledujúcich krokoch práce.)
 
 \subsection{Materialy}
-\subsubsection{Interaktivne grafy}
-\subsection{Vytváranie úloh (Admin)}
+Ďalšou súčasťou aplikácie je sekcia študijných materiálov, ktorá slúži študentom ako efektívna podpora počas štúdia matematickej štatistiky a pravdepodobnosti. 
+Táto časť aplikácie obsahuje systematicky usporiadané študijné poznámky, ktoré pokrývajú učebné osnovy predmetu Matematická štatistika.
+ Obsah je kategorizovaný podľa jednotlivých tematických oblastí, čo umožňuje jednoduchú orientáciu v študovanom obsahu.
 
+Každá téma obsahuje teoretické poznatky spolu s jasne spracovanými vzorovými príkladmi. 
+Súčasťou týchto príkladov je aj detailný postup výpočtu, ktorý študentom slúži ako metodická pomôcka pri riešení podobných úloh.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=14cm]{img/materialy.png}
+  \caption{Ukážka sekcie študijných materiálov s príkladom.}
+  \label{materialy}
+  \end{figure}
+
+\subsubsection{Interaktivne grafy}
+Na zvýšenie interaktivity a pochopenia zložitých matematických konceptov sú v rámci materiálov integrované aj interaktívne grafy. 
+Tieto grafy vizuálne demonštrujú dôležité pravdepodobnostné princípy, ako napríklad priebehy distribučných funkcií alebo hustoty pravdepodobnosti rôznych rozdelení. 
+Grafické znázornenie výrazne uľahčuje študentom pochopenie abstraktných matematických myšlienok a prehlbuje ich schopnosť aplikovať získané vedomosti v praxi.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=14cm]{img/grafy.png}
+  \caption{Ukážka interaktívneho grafu.}
+  \label{grafy}
+  \end{figure}
 \subsection{Vyhodnocovanie úloh}
+
+\subsection{Vytváranie a úprava úloh administrátorom TODO: Fotka mozno}
+
+V rámci administrátorskej časti aplikácie bola implementovaná funkcionalita umožňujúca správcom systému vytvárať nové úlohy a upravovať existujúce zadania.
+ Cieľom tejto funkcionality je umožniť dynamické rozširovanie databázy úloh bez potreby manuálnych zásahov do databázy na úrovni servera.
+
+Pri návrhu rozhrania na vkladanie úloh bolo dôležité zabezpečiť, aby bol proces tvorby matematických otázok intuitívny a používateľsky prívetivý, najmä pri práci s matematickými zápismi a vzorcami.
+ Tento cieľ bol dosiahnutý integráciou knižnice \textbf{MathQuill}, ktorá umožňuje dynamické a interaktívne zadávanie matematických výrazov.
+
+\textbf{MathQuill} poskytuje rozhranie, v ktorom môže administrátor zadávať matematické vzorce v LaTeX formáte. 
+V reálnom čase dochádza k ich prekladu do vizuálne čitateľnej podoby, čím sa zabezpečuje okamžitá spätná väzba a minimalizácia syntaktických chýb.
+ Matematické výrazy sú zobrazované v editovateľnom textovom poli, ktoré verne imituje klasickú matematickú notáciu, čo výrazne zvyšuje používateľský komfort a presnosť zadávania úloh.
+
+Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zabezpečuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
+
+V nasledujúcej časti uvedieme príklad rozhrania na pridávanie úlohy a spôsob jeho prepojenia s databázovým systémom.
 
 
 
@@ -818,4 +890,3 @@ Týmto spôsobom zabezpečujeme na klientovi, že sa na súkromné alebo adminis
   single vs multiple container approach
 
   \section{Testovanie}
-  \section{Zaver}
