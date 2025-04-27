@@ -521,13 +521,15 @@ V rámci navrhnutej aplikácie sme zaviedli nasledujúce gamifikačné prvky:
 \item \textbf{Bodový systém s bonusmi} – používateľ získava štandardné body za každú správne zodpovedanú otázku. 
 Okrem toho sú prideľované aj bonusové body za rýchlosť odpovede, čím sa študenti podporujú v efektívnom a rýchlom riešení úloh.
 
-\item \textbf{Vizuálna a zvuková spätná väzba} – aplikácia okamžite reaguje na správne alebo nesprávne odpovede študenta. Vizuálne je táto spätná väzba reprezentovaná farebným označením stavu jednotlivých otázok, pričom je doplnená aj vhodnými zvukovými efektmi. Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti.
+\item \textbf{Vizuálna a zvuková spätná väzba} – aplikácia okamžite reaguje na správne alebo nesprávne odpovede študenta.
+ Vizuálne je táto spätná väzba reprezentovaná farebným označením stavu jednotlivých otázok, pričom je doplnená aj vhodnými zvukovými efektmi. 
+Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti. Ktorá je zobrazená na obrázku~\ref{gamification}.
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \includegraphics[width=14cm]{img/gamification.png}
   \caption{Ukážka vizuálnej spätnej väzby v gamifikovanom režime testovania.}
-  \label{fig:gamification-feedback}
+  \label{gamification}
 \end{figure}
 
 Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti.
@@ -535,10 +537,15 @@ Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svo
 \item \textbf{Nápovedy s penalizáciou} – v prípade, že používateľ potrebuje pomôcť s riešením úloh, má možnosť využiť nápovedu. Tá ho môže nasmerovať k správnemu riešeniu, avšak za každú použitú nápovedu sú používateľovi odpočítané body. Týmto spôsobom podporujeme študentov k samostatnosti a zároveň pridávame do vzdelávania súťažný rozmer. \end{itemize}
 
 Na stránke so štatistikami má študent následne možnosť vidieť, v akom percentile výkonnosti sa nachádza, čo mu poskytuje objektívnu informáciu o jeho relatívnej úspešnosti voči ostatným používateľom aplikácie. Tieto prvky spolu vytvárajú efektívne a interaktívne prostredie, ktoré podporuje kontinuálne vzdelávanie a rozvoj matematických schopností študentov.
-\subsubsection{Generovanie úloh TODO}
+\subsubsection{Generovanie úloh (TODO??)}
 
 Pri návrhu aplikácie sme sa rozhodli implementovať mechanizmus \textbf{automatického generovania úloh}, ktorého cieľom bolo zvýšiť variabilitu testov a zabezpečiť, aby používatelia neboli limitovaní iba na statické úlohy uložené v databáze. 
 Takto generované úlohy pridávajú do testovania prvok náhodnosti a prekvapenia, čím dochádza k efektívnejšiemu prevereniu skutočných vedomostí a schopností študenta.
+Generátor úloh je navrhnutý tak, aby dynamicky vytváral nové zadania založené na vybraných pravdepodobnostných rozdeleniach. V súčasnej verzii aplikácie podporujeme generovanie úloh z nasledujúcich rozdelení:
+
+\begin{itemize} \item \textbf{Binomické rozdelenie} \item \textbf{Geometrické rozdelenie} \item \textbf{Hypergeometrické rozdelenie} \end{itemize}
+
+Každá vygenerovaná úloha je unikátna, pričom vstupné parametre ako počet pokusov, počet úspechov alebo pravdepodobnosť úspechu sú generované náhodne v definovanom rozsahu.
 \subsection{Materialy}
 Ďalšou súčasťou aplikácie je sekcia študijných materiálov, ktorá slúži študentom ako efektívna podpora počas štúdia matematickej štatistiky a pravdepodobnosti. 
 Táto časť aplikácie obsahuje systematicky usporiadané študijné poznámky, ktoré pokrývajú učebné osnovy predmetu Matematická štatistika.
