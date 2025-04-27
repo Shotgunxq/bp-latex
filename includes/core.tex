@@ -512,8 +512,11 @@ Gamifikačné mechanizmy majú potenciál výrazne zlepšiť angažovanosť štu
 
 V rámci navrhnutej aplikácie sme zaviedli nasledujúce gamifikačné prvky:
 
-\begin{itemize} \item \textbf{Leaderboard (rebríček)} – používatelia získavajú za správne odpovede body, na základe ktorých sa vytvára dynamický rebríček.
-   Umiestnenie používateľa na rebríčku mu poskytuje prehľad o vlastnej výkonnosti v porovnaní s ostatnými študentmi a motivuje ho k ďalšiemu zlepšovaniu.
+\begin{itemize} \item \textbf{Percentilové hodnotenie} – namiesto klasického zoradenia používateľov podľa počtu bodov aplikácia využíva hodnotenie na základe \textbf{percentilu}. 
+  Tento ukazovateľ vyjadruje, aké percento ostatných študentov dosiahlo horší alebo rovnaký výsledok.
+   Zobrazenie percentilu poskytuje študentovi okamžitú a objektívnu informáciu o jeho relatívnej výkonnosti v rámci všetkých účastníkov testovania a zároveň ho motivuje k ďalšiemu zlepšovaniu.
+  Ukážku zobrazovania percentilového hodnotenia možno vidieť na obrázku~\ref{test-results}.
+  
 
 \item \textbf{Bodový systém s bonusmi} – používateľ získava štandardné body za každú správne zodpovedanú otázku. 
 Okrem toho sú prideľované aj bonusové body za rýchlosť odpovede, čím sa študenti podporujú v efektívnom a rýchlom riešení úloh.
@@ -532,10 +535,10 @@ Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svo
 \item \textbf{Nápovedy s penalizáciou} – v prípade, že používateľ potrebuje pomôcť s riešením úloh, má možnosť využiť nápovedu. Tá ho môže nasmerovať k správnemu riešeniu, avšak za každú použitú nápovedu sú používateľovi odpočítané body. Týmto spôsobom podporujeme študentov k samostatnosti a zároveň pridávame do vzdelávania súťažný rozmer. \end{itemize}
 
 Na stránke so štatistikami má študent následne možnosť vidieť, v akom percentile výkonnosti sa nachádza, čo mu poskytuje objektívnu informáciu o jeho relatívnej úspešnosti voči ostatným používateľom aplikácie. Tieto prvky spolu vytvárajú efektívne a interaktívne prostredie, ktoré podporuje kontinuálne vzdelávanie a rozvoj matematických schopností študentov.
-\subsubsection{Generovanie úloh}
+\subsubsection{Generovanie úloh TODO}
 
-Táto podsekcia sa venuje technickému procesu generovania úloh pre testy na základe používateľských preferencií, výberu tém a obtiažností. (Obsah bude dopísaný v nasledujúcich krokoch práce.)
-
+Pri návrhu aplikácie sme sa rozhodli implementovať mechanizmus \textbf{automatického generovania úloh}, ktorého cieľom bolo zvýšiť variabilitu testov a zabezpečiť, aby používatelia neboli limitovaní iba na statické úlohy uložené v databáze. 
+Takto generované úlohy pridávajú do testovania prvok náhodnosti a prekvapenia, čím dochádza k efektívnejšiemu prevereniu skutočných vedomostí a schopností študenta.
 \subsection{Materialy}
 Ďalšou súčasťou aplikácie je sekcia študijných materiálov, ktorá slúži študentom ako efektívna podpora počas štúdia matematickej štatistiky a pravdepodobnosti. 
 Táto časť aplikácie obsahuje systematicky usporiadané študijné poznámky, ktoré pokrývajú učebné osnovy predmetu Matematická štatistika.
@@ -561,7 +564,27 @@ Grafické znázornenie výrazne uľahčuje študentom pochopenie abstraktných m
   \caption{Ukážka interaktívneho grafu.}
   \label{grafy}
   \end{figure}
+
 \subsection{Vyhodnocovanie úloh}
+
+Po dokončení testu má používateľ k dispozícii detailný rozbor svojho riešenia. 
+Na tejto podstránke je možné spätne prehliadať absolvované testy, pričom ku každému testu je zobrazovaný zoznam jednotlivých úloh s vyznačením správnosti odpovede.
+
+ Každú úlohu je možné rozkliknúť a prezrieť si zadanie spolu s odpoveďou, čo podporuje proces spätného učenia a upevňovania vedomostí.
+
+Okrem samotného zoznamu úloh je súčasťou zobrazenia aj základné štatistické zhrnutie testu, ako napríklad počet správnych odpovedí, celkový počet získaných bodov a dosiahnutý percentil.
+
+Percentil poskytuje používateľovi okamžitú informáciu o jeho relatívnom postavení medzi všetkými účastníkmi testovania, a to na základe získaného skóre.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=14cm]{img/test-results.png}
+  \caption{Ukážka podstránky vyhodnocovania testu a zobrazenie dosiahnutého percentilu.}
+  \label{test-results}
+\end{figure}
+
+
 
 \subsection{Vytváranie a úprava úloh administrátorom TODO: Fotka mozno}
 
@@ -577,7 +600,6 @@ V reálnom čase dochádza k ich prekladu do vizuálne čitateľnej podoby, čí
 
 Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zabezpečuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
 
-V nasledujúcej časti uvedieme príklad rozhrania na pridávanie úlohy a spôsob jeho prepojenia s databázovým systémom.
 
 
 
@@ -658,6 +680,7 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
 \end{figure}
 
 \subsubsection{Graficka cast tejto PICOVINY}
+TODO
  RxJS
  node-sass kvoli renderovaniu
  apex charts - lazy loading
@@ -672,7 +695,7 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
 
 \subsection{Backend}
 
- 
+ TODO
  Node
  Nginx
 
