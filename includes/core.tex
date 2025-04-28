@@ -607,7 +607,32 @@ V reálnom čase dochádza k ich prekladu do vizuálne čitateľnej podoby, čí
 
 Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zabezpečuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
 
+\subsection{Export testov a výsledkov}
 
+V rámci rozšírenia funkcionality aplikácie bola implementovaná sekcia \textbf{Export}, ktorá reflektuje potreby a preferencie študentov preferujúcich tradičné metódy učenia, ako je štúdium pomocou papiera a pera aj v digitálnej ére.
+
+Stránka Export obsahuje dve hlavné funkcionality:
+
+\begin{itemize}
+    \item \textbf{Generovanie testu do PDF formátu} – používateľ má možnosť vygenerovať si novú sadu úloh podobne ako v režime preskúšania.
+     Úlohy sú obohatené o nápovedy a následne spracované do PDF dokumentu, ktorý si študent môže vytlačiť a riešiť v offline prostredí.
+      Táto funkcionalita je určená najmä pre tých, ktorí uprednostňujú fyzický výpočet úloh a písanie riešení na papier.
+
+    \item \textbf{Export vypracovaných výsledkov} – študent si môže stiahnuť aj prehľad svojich absolvovaných testov vrátane odpovedí, výsledkov a štatistík.
+     Tento export umožňuje jednoduchú archiváciu pokroku a spätnú analýzu riešených úloh.
+\end{itemize}
+
+Obe PDF súbory sú generované dynamicky na základe dát získaných z aplikácie, pričom na tvorbu dokumentov je využívaná knižnica \textbf{pdfmake}.
+ Štruktúra vygenerovaných súborov bola navrhnutá tak, aby bola prehľadná, čitateľná a používateľsky prívetivá.
+
+Na obrázku~\ref{pdf-export} je ukážka časti vygenerovaného PDF dokumentu obsahujúceho zadania úloh.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=14cm]{img/pdf.png}
+  \caption{Ukážka vygenerovaného PDF súboru so sadou úloh na precvičovanie.}
+  \label{pdf-export}
+\end{figure}
 
 
  \section{Implementacia webovej aplikacie}
@@ -688,23 +713,30 @@ Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová 
 
 \subsubsection{Graficka cast tejto PICOVINY}
 TODO
+  \subsubsection{fookin desinge}
  RxJS
  node-sass kvoli renderovaniu
- apex charts - lazy loading
  math jax 
- chart.js 
- mathquill
- jQuery
- pdfmake
  Bootstrap
  bootstrap animation
  freedsound.org
+
+ 
+ \subsubsection{MathQuill}
+ mathquill
+ jQuery
+
+ \subsection{Grafy}
+ apex charts - lazy loading
+ 
+ \subsubsection{export}
+ pdfmake
+
 
 \subsection{Backend}
 
  TODO
  Node
- Nginx
 
  CURL veci
 
@@ -911,12 +943,142 @@ Týmto spôsobom zabezpečujeme na klientovi, že sa na súkromné alebo adminis
  tu napiseme o ApiService a o AdminService, a taktiez o autogenerovanych veciach ktore budu ale prepisane na helper servicky 
 
  
- \subsection{DB}
+ \subsection{DB???? nepaci sa mi toto}
+
  prepajanie
   PostgreSQL
   built in mechanica pre data persistance and backps PostgreSQL allows you to specify a data directory where database files are stored, which you can mount as a volume or bind mount in Docker.****
 
+
+  Po úspešnej inštalácii databázového systému PostgreSQL sa môžeme uistiť o správnosti nastavenia spustením interaktívneho príkazu \texttt{psql} v príkazovom riadku.
+   Tento príkaz nám otvorí terminál PostgreSQL, v ktorom môžeme zadávať SQL dotazy priamo do databázy.
+
+  Prepojenie databázy s našou webovou aplikáciou zabezpečujeme prostredníctvom JavaScriptového súboru \texttt{db.js}.
+   V tomto súbore definujeme pripojenie na databázu pomocou knižnice \texttt{pg}, ktorá poskytuje jednoduchú integráciu PostgreSQL do Node.js aplikácie.
+  
+  Príklad konfigurácie pripojenia je nasledujúci:
+  
+  \begin{lstlisting}[
+    caption={Ukážka pripojenia na PostgreSQL databázu pomocou knižnice pg},
+    label={db-config},
+    language=java,
+    style=code-listing
+  ]  const express = require('express');
+  const router = express.Router();
+  const { Pool } = require('pg');
+  
+  // Konfigurácia pripojenia na PostgreSQL
+  the const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost', // adresa databázového servera
+    database: 'postgres', // názov databázy
+    password: 'postgres123', // heslo používateľa
+    port: 5432, // štandardný port PostgreSQL
+  });
+  
+  module.exports = {
+    pool, // exportujeme pripojenie pre ďalšie použitie
+    query: (text, params) => pool.query(text, params),
+    findUserById,
+    insertUser,
+  };
+  \end{lstlisting}
+  
+  V uvedenom príklade nastavujeme používateľské meno, heslo, adresu hostiteľa a číslo portu, cez ktorý sa aplikácia pripája k databáze.
+   Objekt \texttt{pool} nám umožňuje efektívne spravovať viacero súčasných pripojení do databázy.
+  
+  Tieto exportované moduly následne využívame v hlavnom súbore \texttt{server.js}, kde vykonávame SQL dotazy a získavame dáta potrebné pre beh aplikácie.
+  
   \subsection{Docker}
+  Nginx
+
+
   single vs multiple container approach
+
+  \section{Dockerizácia aplikácie}
+
+Všetky predchádzajúce kroky inštalácie samostatných závislostí (Node.js, Angular CLI, PostgreSQL) sú pri dockerizovanej aplikácii zbytočné, pretože Docker abstrahuje a izoluje pracovné prostredie každej zložky aplikácie. Vďaka tomu sa nemusíme zaoberať ručnou správou verzií či navzájom prepojených knižníc.
+
+Naša architektúra je rozdelená do viacerých kontajnerov:
+\begin{itemize}
+  \item \textbf{Frontend (Angular)} – beží v samostatnom Nginx kontajneri.
+  \item \textbf{Backend (Node.js/Express)} – beží v samostatnom Node.js kontajneri.
+  \item \textbf{Databáza (PostgreSQL)} – využíva oficiálny PostgreSQL obraz.
+\end{itemize}
+
+Takýto prístup (multi-container system) zabezpečuje lepšiu modularitu, škálovateľnosť a prehľadnosť infraštruktúry.
+
+Nižšie je ukážka Dockerfile pre Angular aplikáciu:
+
+\begin{verbatim}
+# Use an official Node.js runtime as a base image
+FROM node:20.11.1 as builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install --force
+
+# Copy the application code and build\COPY . .
+RUN npm install -g @angular/cli && ng build --configuration production
+
+# Use a smaller image for serving the Angular app
+FROM nginx:alpine
+
+# Copy the built Angular app to the nginx public directory
+COPY --from=builder /app/dist/browser /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Default command
+CMD ["nginx", "-g", "daemon off;"]
+\end{verbatim}
+
+V tomto Dockerfile sa v prvej fáze (builder) vytvára produkčná build Angular aplikácie a v druhej fáze sa tento build kopíruje do Nginx kontajnera, ktorý ho staticky servuje.
+
+A tu je relevantná časť \texttt{docker-compose.yml}, ktorá definuje jednotlivé služby a ich závislosti:
+
+\begin{verbatim}
+version: "3.8"
+services:
+  angular-frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.angular
+    ports:
+      - "80:80"
+    depends_on:
+      - node-backend
+
+  node-backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./scripts/db:/docker-entrypoint-initdb.d
+\end{verbatim}
+
+Vďaka týmto nastaveniam Docker Compose zabezpečí postupné zostavenie a spustenie služieb v správnom poradí, pričom každá vrstva (fe, be, db) je izolovaná vo vlastnom kontajneri.
+
 
   \section{Testovanie}
