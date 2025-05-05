@@ -280,33 +280,22 @@ Git je distribuovaný systém slúžiaci na správu verzií, ktorým sa dajú sl
 Je open-source, bezplatný a vďaka svojim vlastnostiam sa stal štandardom v oblasti verzionovania kódu.\cite{git}
 
 \section{Návrh webovej aplikácie}
-Naša webová aplikácia je koncipovaná ako dvojvrstvový systém, pozostávajúci z frontendovej časti, implementovanej pomocou frameworku Angular, a backendovej časti, vytvorenej pomocou platformy Express.
- Obe časti sú navrhnuté ako samostatné a na sebe nezávislé aplikácie, čo zvyšuje flexibilitu a umožňuje ich samostatný vývoj, testovanie a nasadzovanie.
+Naša webová aplikácia, koncipovaná ako dvojvrstvový systém, pozostáva z časti  backendovej - vytvorenej pomocou platformy Express - a frontendovej - implementovanej pomocou frameworku Angular.
+Fakt, že sme obidve časti navrhnli ako samostatné a na sebe nezávislé aplikácie, nám v procese vytvárania umožnil väčšiu flexibilitu nielen v oblasti samotného vývoja, ale aj testovania či nasadzovania aplikácie na server.
 
- Backendová časť je zodpovedná za spracovanie údajov, manipuláciu s databázou, \acrshort{ldap} autentifikáciu používateľov a spracovanie požiadaviek zo strany klienta.
- Slúži ako integračná vrstva medzi používateľským rozhraním a databázou, pričom zabezpečuje bezpečný a efektívny prenos údajov. 
- Backend sme implementovali pomocou frameworku Express.js, ktorý je postavený na Node.js a umožňuje jednoducho vytvárať REST API rozhrania. 
- Medzi jeho hlavné výhody patrí jednoduchosť, flexibilita, rozsiahla komunita a množstvo dostupných middleware modulov, čo výrazne urýchľuje vývoj serverovej logiky.
+Ako sme už spomenuli v predchádzajúcich kapitolách, backendová časť je zodpovedná za spracovanie údajov, manipuláciu s databázou, \acrshort{ldap} autentifikáciu používateľov a spracovanie požiadaviek zo strany klienta. Ide o akúsi integračnú vrstvu medzi používateľským rozhraním a databázou, ktorá zabezpečuje bezpečný a efektívny prenos údajov. 
 
-Express.js je zároveň ideálne riešenie pre aplikácie typu \acrshort{spa}, akú predstavuje aj náš frontend vytvorený v Angulari. 
-V tomto architektonickom modeli Express plní úlohu backendovej vrstvy, ktorá poskytuje API endpointy, prostredníctvom ktorých frontend získava dynamicky obsah a dáta. 
-Táto kombinácia umožňuje rýchlu a plynulú interakciu používateľa s aplikáciou bez potreby neustáleho obnovovania stránky, čím sa zvyšuje používateľský komfort a celkový výkon systému.
+Backend sme implementovali pomocou frameworku Express.js, postavenom na Node.js. Dôvodom bola nielen jeho funkcia jednoducho vytvárať \acrshort{rest} \acrshort{api} rozhrania, ale aj dispozícia mnohých ďalších výhod, akými sú jednoduchosť, flexibilita, rozsiahla komunita a množstvo dostupných middleware modulov, čo výrazne urýchľuje vývoj serverovej logiky.
 
-Pomocou \acrshort{ldap} autentifikácie dokážeme navyše overovať identitu používateľov a priraďovať im prístupové práva na základe ich roly – napríklad ako študent alebo administrátor (učiteľ).
- Tento prístup umožňuje efektívne riadenie oprávnení a zabezpečenie rôznych úrovní prístupu k funkcionalitám aplikácie.
+Express.js je zároveň ideálne riešenie pre aplikácie typu \acrshort{spa}, akú predstavuje aj náš frontend vytvorený v Angulari. V tomto architektonickom modeli plní Express úlohu backendovej vrstvy poskytujúcej \acrshort{api} endpointy, prostredníctvom ktorých frontend získava dynamicky obsah a dáta. Táto kombinácia zaisťuje rýchlu a plynulú interakciu používateľa s aplikáciou bez potreby neustáleho obnovovania stránky, čím sa zvyšuje používateľský komfort a celkový výkon systému.
 
-Frontendová časť aplikácie je navrhnutá ako \acrfull{spa}.
- Použitie Angular frameworku bolo motivované jeho výbornou škálovateľnosťou a komponentovým prístupom, ktorý umožňuje vytvárať zapuzdrené (encapsulované) komponenty.
-  Tento prístup vedie k lepšej organizácii a čitateľnosti kódu, a zároveň uľahčuje jeho údržbu a opätovné použitie.
+Na efektívne riadenie oprávnení a zabezpečenie rôznych úrovní prístupu k funkcionalitám aplikácie slúži \acrshort{ldap} autentifikácia. Tá overuje identitu používateľov a priraďuje im prístupové práva na základe ich roly, ktorými sú v našej aplikácii študent a administrátor (učiteľ). 
 
-Komunikácia medzi frontendom a backendom je sprostredkovaná prostredníctvom tzv. servisných tried (Services), ktoré Angular poskytuje ako jednu zo svojich kľúčových funkcionalít.
- Tieto služby slúžia na získavanie údajov zo servera, validáciu používateľských vstupov, uchovávanie stavu aplikácie, ako aj na centrálne spracovanie logiky a dát. 
- Každá Angular služba je singleton\footnote{Návrhový vzor, ktorý zabezpečuje, že z určitej triedy existuje v aplikácii práve jedna inštancia, ktorá je globálne dostupná.} objekt, čo umožňuje zdieľanie dát a funkcionality naprieč celou aplikáciou. 
- Tento prístup významne zvyšuje modularitu systému a podporuje znovupoužiteľnosť kódu.
+Frontend sme navrhli ako \acrfull{spa} s použitím frameworku Angular. Ten sme vybrali pre jeho výbornú škálovateľnosťou a komponentový prístup, ktorý umožňuje vytvárať zapuzdrené (encapsulované) komponenty. Vďaka tomuto sa kód lepšie organizuje a je viac čitateľný  a lepšie sa preto pracuje na jeho údržbe a opätovnom použití.
 
- Pri asynchrónnej komunikácii a práci s údajmi využívame v Angulari mechanizmus Observables, ktorý je súčasťou knižnice \acrshort{rxjs}. 
- Observables umožňujú efektívne pracovať s dátovými tokmi, ako sú napríklad \acrshort{http} požiadavky alebo používateľské vstupy, pričom poskytujú pokročilé možnosti ako je reaktívne spracovanie dát, zrušenie požiadaviek, spájanie viacerých streamov alebo transformácia údajov. 
- Vďaka tejto reaktívnej paradigme dokáže aplikácia flexibilne reagovať na zmeny v dátach a zvyšuje sa jej interaktivita, výkon a stabilita.
+Komunikácia medzi frontendom a backendom je sprostredkovaná prostredníctvom tzv. servisných tried (Services), ktoré Angular poskytuje ako jednu zo svojich kľúčových funkcionalít. Tieto služby slúžia na získavanie údajov zo servera, validáciu používateľských vstupov, uchovávanie stavu aplikácie, ako aj na centrálne spracovanie logiky a dát. Každá Angular služba je singleton\footnote{Návrhový vzor, ktorý zabezpečuje, že z určitej triedy existuje v aplikácii práve jedna inštancia, ktorá je globálne dostupná.} objekt a zdieľa dáta a funkcionality naprieč celou aplikáciou, vďaka čomu sa signifikantne zvyšuje modularita systému a podporuje sa znovupoužiteľnosť kódu.
+
+Pri asynchrónnej komunikácii a práci s údajmi sme v Angulari využili mechanizmus Observables, ktorý je súčasťou knižnice \acrshort{rxjs}. Tento mechanizmus dokáže efektívne pracovať s dátovými tokmi, ako sú napríklad \acrshort{http} požiadavky alebo používateľské vstupy, a poskytuje pokročilé možnosti týkajúce sa reaktívneho spracovania dát, zrušenia požiadaviek, spájania viacerých streamov alebo transformácie údajov. Vďaka tejto reaktívnej paradigme dokáže aplikácia flexibilne reagovať na zmeny v dátach a zvyšuje sa jej interaktivita, výkon a stabilita.
 
 
 \subsection{Špecifikácia}
@@ -320,7 +309,7 @@ Systém zároveň rozlišuje dve hlavné role používateľov – rolu \textit{�
  Študentom aplikácia umožňuje prístup k študijným materiálom, generovanie testov a sledovanie svojho pokroku.
   Administrátori majú k dispozícii rozšírené možnosti správy obsahu, vrátane tvorby testov, ako aj monitorovania aktivít a pokroku jednotlivých študentov.
 
-  Pre systematické znázornenie interakcií použivateľov so systémom, sú vytvorené diagramy prípadov použitia zvlášť pre rolu študenta (obrázok č. ~\ref{studentdiagram}) a administrátora (obrázok č. ~\ref{admindiagram}), ktoré ú súčasťou ďalších kapitol tejto práce.
+  Pre systematické znázornenie interakcií použivateľov so systémom, sú vytvorené diagramy prípadov použitia zvlášť pre rolu študenta (obrázok č. ~\ref{studentdiagram}) a administrátora (obrázok č. ~\ref{admindiagram}), ktoré súčasťou ďalších kapitol tejto práce.
 
 \subsection{Funkcionálne požiadavky}
 Funkcionálne požiadavky sú špecifikácie, ktoré definujú, čo by systém mal robiť a aké funkcie by mal poskytovať používateľom.
@@ -342,7 +331,7 @@ Funkcionálne požiadavky sú špecifikácie, ktoré definujú, čo by systém m
   \item Prihlásenie do systému pomocou \acrshort{ldap} autentifikácie ako učiteľ.
 \item Zobrazovanie výsledkov všetkých študentov.
 \item Prístup k všeobecným štatistikám a analýzam výkonnosti.
-\item Pridávanie novúch testoých úloh.
+\item Pridávanie nových testoých úloh.
 \item Správa existujúcich testových úloh vrátane ich úpravy a mazania.
 \item Zobrazovanie histórie testov a pokroku jednotlivých študentov.
   \end{itemize}
@@ -383,14 +372,14 @@ Nefunkcionálne požiadavky sú špecifikácie, ktoré sa zameriavajú na vlastn
 
  \subsection{Databáza}
  Databázovým systémom našej webovej aplikácie je PostgreSQL, ktorý sme si zvolili pre jeho flexibilnú prácu s dátami. 
- Využívame najmä podporu pre JSONB, ktorá nám umožňuje efektívne ukladať a vyhľadávať polostruktúrované dáta, ako sú odpovede či nápovedy.
+ Využívame najmä podporu pre JSONB, vďaka ktorej vieme efektívne ukladať a vyhľadávať polostruktúrované dáta, ako sú odpovede či nápovedy.
 
 Ďalšou výhodou je podpora poľových typov (ARRAY), ktoré zjednodušujú štruktúru databázy tým, že umožňujú uchovávať viacero hodnôt v jednom stĺpci. 
 PostgreSQL nám tak poskytuje výkonné a praktické riešenie pre prácu s komplexnými údajmi.
 
 Okrem uvedených výhod PostgreSQL veľmi dobre spolupracuje s kontajnerizačnou platformou \textbf{Docker}.
 Prostredníctvom Docker kontajnerov môžeme jednoducho spustiť databázu s vopred definovanou štruktúrou a údajmi.
-Docker nám tiež umožňuje automatizovať tento proces pomocou bash skriptu, ktorý načíta inicializačné SQL skripty pri spustení kontajnera.
+Docker taktiež dokáže automatizovať tento proces pomocou bash skriptu, ktorý načíta inicializačné SQL skripty pri spustení kontajnera.
 Vďaka tomu je databáza okamžite pripravená na používanie v potrebnej konfigurácii ihneď po spustení kontajnera.
 
 Na obrázku č~\ref{dbtableobr}. je zobrazený logický ER diagram (Entity-Relationship Diagram) databázového modelu našej aplikácie.
@@ -406,7 +395,7 @@ Na obrázku č~\ref{dbtableobr}. je zobrazený logický ER diagram (Entity-Relat
 Databáza sa skladá z nasledovných tabuliek:
 \begin{itemize}
   \item \textit{users} – uchováva informácie o prihlásených používateľoch. 
-  Keďže autentifikáciu zabezpečujeme prostredníctvom akademického LDAP systému, neukladáme žiadne citlivé dáta, ktoré by neboli dostupné priamo z \acrshort{ldap}. 
+  Keďže autentifikáciu realizujeme prostredníctvom akademického LDAP systému, neukladáme žiadne citlivé dáta, ktoré by neboli dostupné priamo z \acrshort{ldap}. 
   Okrem základných údajov rozlišujeme aj typ používateľa (študent alebo administrátor/učiteľ), ktorý taktiež získavame z \acrshort{ldap} a ktorý ovplyvňuje rozsah oprávnení v aplikácii.
   \item \textit{themes} - obsahuje zoznam matematických tém, primárne z oblasti matematickej štatistiky, ktoré slúžia na kategorizáciu úloh.
   \item \textit{exercises} - uchováva údaje o jednotlivých úlohách, ako sú zadanie, úroveň obtiažnosti, počet bodov, správna odpoveď a dostupné nápovedy. 
@@ -426,7 +415,7 @@ Polia \textit{answers} a \textit{hints} sú uložené vo formáte JSONB, čo umo
   \label{dbjsonb}
  \end{figure}
 
- Každé zadanie úlohy (description) je uložené ako reťazec vo formáte LaTeX, čo umožňuje pohodlný zápis matematických vzorcov a výrazov. Tento spôsob zápisu je výhodný najmä pre potreby zobrazovania úloh vo webovom rozhraní pomocou renderovacích nástrojov ako je napríklad MathJax, ktoré dokážu LaTeX premeniť na kvalitne vykreslené rovnice.
+ Každé zadanie úlohy (description) je uložené ako reťazec vo formáte LaTeX, ktorého prednosťou je pohodlný zápis matematických vzorcov a výrazov. Tento spôsob zápisu je výhodný najmä pre potreby zobrazovania úloh vo webovom rozhraní pomocou renderovacích nástrojov ako je napríklad MathJax, ktoré dokážu LaTeX premeniť na kvalitne vykreslené rovnice.
 
 Príklad zápisu jednej úlohy s použitím LaTeX zápisu je znázornený na obrázku č.~\ref{latexpriklad}.
 
@@ -440,9 +429,9 @@ Príklad zápisu jednej úlohy s použitím LaTeX zápisu je znázornený na obr
 
 \subsection{Použivateľské rozhranie}
 
-Používateľské rozhranie aplikácie bolo navrhnuté s dôrazom na prehľadnosť, jednoduchosť a intuitívnu navigáciu, čím sme chceli docieliť zníženie kognitívnej záťaže používateľa a zvyšuje sa celková používateľská skúsenosť (UX). Cieľom návrhu bolo zabezpečiť, aby sa aj používateľ s minimálnymi digitálnymi zručnosťami dokázal v prostredí jednoducho orientovať a efektívne pracovať so všetkými funkciami aplikácie.
+Používateľské rozhranie aplikácie bolo navrhnuté s dôrazom na prehľadnosť, jednoduchosť a intuitívnu navigáciu, čím sme chceli docieliť zníženie kognitívnej záťaže používateľa a zvýšiť celkovú používateľskú skúsenosť (UX). Cieľom návrhu bolo zabezpečiť, aby sa aj používateľ s minimálnymi digitálnymi zručnosťami dokázal v prostredí jednoducho orientovať a efektívne pracovať so všetkými funkciami aplikácie.
 
-Základná štruktúra dizajnu bola vytvorená v nástroji Figma, ktorý umožnil vizuálny návrh používateľského rozhrania ešte pred samotnou implementáciou. Rozhranie je koncipované ako hlavné menu s veľkými, vizuálne výraznými blokmi, ktoré reprezentujú jednotlivé kľúčové funkcie aplikácie:
+Základná štruktúra dizajnu bola vytvorená v nástroji Figma, ktorý poskytol vizuálny návrh používateľského rozhrania ešte pred samotnou implementáciou. Rozhranie je koncipované ako hlavné menu s veľkými, vizuálne výraznými blokmi, ktoré reprezentujú jednotlivé kľúčové funkcie aplikácie:
 \begin{itemize} 
   \item Písanie testu 
   \item Zobrazenie napísaných testov 
@@ -474,7 +463,7 @@ V porovnaní s finálnou implementáciou prešli niektoré prvky úpravami zamer
 \subsection{Preskúšanie sa}
 
 Súčasťou navrhovanej webovej aplikácie je stránka umožňujúca používateľom vytvárať vlastné testovacie sady úloh na precvičenie a preverenie vedomostí z oblasti pravdepodobnosti a štatistiky.
- Používateľské rozhranie tejto stránky (obrázok~\ref{test-creation}) bolo navrhnuté tak, aby bolo intuitívne a aby zabezpečovalo príjemnú používateľskú skúsenosť (UX).
+ Používateľské rozhranie tejto stránky (obrázok~\ref{test-creation}) bolo navrhnuté tak, aby bolo intuitívne a aby bola použivateľská skúsenosť čo najlepšia (\acrshort{ux}).
 
 \begin{figure}[h!]
   \centering
@@ -527,7 +516,7 @@ Okrem toho sú prideľované aj bonusové body za rýchlosť odpovede, čím sa 
 
 \item \textbf{Vizuálna a zvuková spätná väzba} – aplikácia okamžite reaguje na správne alebo nesprávne odpovede študenta.
  Vizuálne je táto spätná väzba reprezentovaná farebným označením stavu jednotlivých otázok, pričom je doplnená aj vhodnými zvukovými efektmi. 
-Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti. Ktorá je zobrazená na obrázku~\ref{gamification}.
+Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti. Čo je zobrazené na obrázku~\ref{gamification}.
 
 \begin{figure}[H]
   \centering
@@ -535,8 +524,6 @@ Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svo
   \caption{Ukážka vizuálnej spätnej väzby v gamifikovanom režime testovania.}
   \label{gamification}
 \end{figure}
-
-Týmto spôsobom dostáva používateľ jasnú a jednoznačnú informáciu o svojej aktuálnej úspešnosti.
 
 \item \textbf{Nápovedy s penalizáciou} – v prípade, že používateľ potrebuje pomôcť s riešením úloh, má možnosť využiť nápovedu. Tá ho môže nasmerovať k správnemu riešeniu, avšak za každú použitú nápovedu sú používateľovi odpočítané body. Týmto spôsobom podporujeme študentov k samostatnosti a zároveň pridávame do vzdelávania súťažný rozmer. \end{itemize}
 
@@ -550,10 +537,10 @@ Generátor úloh je navrhnutý tak, aby dynamicky vytváral nové zadania založ
 \begin{itemize} \item \textbf{Binomické rozdelenie} \item \textbf{Geometrické rozdelenie} \item \textbf{Hypergeometrické rozdelenie} \end{itemize}
 
 Každá vygenerovaná úloha je unikátna, pričom vstupné parametre ako počet pokusov, počet úspechov alebo pravdepodobnosť úspechu sú generované náhodne v definovanom rozsahu.
-\subsection{Materialy}
-Ďalšou súčasťou aplikácie je sekcia študijných materiálov, ktorá slúži študentom ako efektívna podpora počas štúdia matematickej štatistiky a pravdepodobnosti. 
+\subsection{Materiály}
+Ďalšou súčasťou aplikácie je sekcia študijných materiálov, ktorá slúži študentom ako podpora počas štúdia matematickej štatistiky a pravdepodobnosti. 
 Táto časť aplikácie obsahuje systematicky usporiadané študijné poznámky, ktoré pokrývajú učebné osnovy predmetu Matematická štatistika.
- Obsah je kategorizovaný podľa jednotlivých tematických oblastí, čo umožňuje jednoduchú orientáciu v študovanom obsahu.
+ Obsah je kategorizovaný podľa jednotlivých tematických oblastí, a tak sa dá v študovanom obsahu jednoducho orientovať.
 
 Každá téma obsahuje teoretické poznatky spolu s jasne spracovanými vzorovými príkladmi. 
 Súčasťou týchto príkladov je aj detailný postup výpočtu, ktorý študentom slúži ako metodická pomôcka pri riešení podobných úloh.
@@ -565,7 +552,7 @@ Súčasťou týchto príkladov je aj detailný postup výpočtu, ktorý študent
   \label{materialy}
   \end{figure}
 
-\subsubsection{Interaktivne grafy}
+\subsubsection{Interaktívne grafy}
 Na zvýšenie interaktivity a pochopenia zložitých matematických konceptov sú v rámci materiálov integrované aj interaktívne grafy. 
 Tieto grafy vizuálne demonštrujú dôležité pravdepodobnostné princípy, ako napríklad priebehy distribučných funkcií alebo hustoty pravdepodobnosti rôznych rozdelení. 
 Grafické znázornenie výrazne uľahčuje študentom pochopenie abstraktných matematických myšlienok a prehlbuje ich schopnosť aplikovať získané vedomosti v praxi.
@@ -609,7 +596,7 @@ Pri návrhu rozhrania na vkladanie úloh bolo dôležité zabezpečiť, aby bol 
 V reálnom čase dochádza k ich prekladu do vizuálne čitateľnej podoby, čím sa zabezpečuje okamžitá spätná väzba a minimalizácia syntaktických chýb.
  Matematické výrazy sú zobrazované v editovateľnom textovom poli, ktoré verne imituje klasickú matematickú notáciu, čo výrazne zvyšuje používateľský komfort a presnosť zadávania úloh.
 
-Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zabezpečuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
+Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zaručuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
 
 \subsection{Export testov a výsledkov}
 
@@ -639,7 +626,7 @@ Na obrázku~\ref{pdf-export} je ukážka časti vygenerovaného PDF dokumentu ob
 \end{figure}
 
 
- \section{Implementacia webovej aplikacie}
+ \section{Implementácia webovej aplikácie}
  V tejto kapitole sa podrobne venujeme implementačnej časti webovej aplikácie, pričom rozdeľujeme jednotlivé aspekty systému na backend, frontend a databázovú vrstvu.
   Cieľom tejto časti je ukázať, ako boli teoretické návrhy z predchádzajúcej kapitoly pretavené do konkrétnej technickej realizácie.
 
@@ -746,7 +733,7 @@ Ako doplnkovú technológiu sme použili \textbf{node-sass}, čo je nástroj umo
     pričom dochádza k okamžitému vizuálnemu prekladu tejto syntaxe do štandardného matematického zápisu.
 
 Knižnica MathQuill je závislá na knižnici \textbf{jQuery}, ktorá zabezpečuje asynchrónnu manipuláciu s HTML a CSS prvkami stránky, ako aj jednoduchú prácu s animáciami a DOM elementmi.
- Spojením týchto technológií sme zabezpečili plynulé a responzívne prostredie pri práci s matematickými výrazmi.
+ Spojením týchto technológií sme vytvorili plynulé a responzívne prostredie pri práci s matematickými výrazmi.
 
 
  \subsection{Export úloh do PDF formátu pomocou pdfmake}
@@ -756,7 +743,7 @@ Knižnica MathQuill je závislá na knižnici \textbf{jQuery}, ktorá zabezpeču
  \begin{verbatim} npm install pdfmake \end{verbatim}
  
  Vytvorenie PDF dokumentu prebieha zostavením tzv. \texttt{documentDefinition} objektu, ktorý definuje rozloženie, obsah a štýl dokumentu. 
- Dynamicky generované úlohy sú následne vložené do tabuľky, kde každá riadok reprezentuje jednu úlohu.
+ Dynamicky generované úlohy sú následne vložené do tabuľky, kde každú riadok reprezentuje jednu úlohu.
  
  Ukážka definície hlavičky a štýlu tabuľky:
  
@@ -887,7 +874,6 @@ Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry bac
 Tento kód vytvorí základný server, ktorý je pripravený na ďalšie definovanie rout a pridávanie funkcionality.
  V projekte je logika rozdelená do tzv. \textbf{servisných tried} (services), ktoré abstrahujú jednotlivé domény funkcionality.
   Tieto triedy slúžia ako rozhranie medzi routou a databázovou logikou.
- Na obrázku~\ref{fig:backend-services} je znázornený výrez zo štruktúry backendu so zameraním na jednotlivé služby.
 \begin{figure}[H]
   \centering
   \includegraphics[width=13cm]{img/backend-services.png}
@@ -914,7 +900,7 @@ app.use(cors({
 Bez tejto konfigurácie by prehliadač blokoval požiadavky medzi rôznymi portmi alebo doménami, čo by znemožnilo komunikáciu medzi frontendom a backendom.
 
 \bigskip
-Na správne spracovanie dát typu \texttt{application/json}, ktoré odosiela Angular prostredníctvom POST alebo PUT požiadaviek, sme použili middleware \textbf{body-parser}. Tento middleware zabezpečí, že JSON objekt v tele požiadavky bude automaticky spracovaný a dostupný cez \texttt{req.body}. Je to obzvlášť dôležité pri práci s databázou PostgreSQL, kde používame dátový typ \texttt{JSONB}.
+Na správne spracovanie dát typu \texttt{application/json}, ktoré odosiela Angular prostredníctvom POST alebo PUT požiadaviek, sme použili middleware \textbf{body-parser}. Tento middleware sa postará o to, že JSON objekt v tele požiadavky bude automaticky spracovaný a dostupný cez \texttt{req.body}. Je to obzvlášť dôležité pri práci s databázou PostgreSQL, kde používame dátový typ \texttt{JSONB}.
 
 \begin{lstlisting}[
   caption={Použitie body-parser pre spracovanie JSON požiadaviek},
@@ -1002,7 +988,7 @@ Týmto nastavením zabezpečíme, že každý JSON payload zo strany klienta bud
  
  \paragraph{Ochrana súkromných a administrátorských rout na strane frontendu}
 
-Na strane klienta (v Angulari) využívame vlastný súbor \texttt{auth.guard.ts}, ktorý zabezpečuje, že k určitým stránkam aplikácie má prístup iba autentifikovaný používateľ. Tento guard je súčasťou smerovania (routing) a overuje, či existuje používateľ v úložisku \texttt{sessionStorage}. Ak nie, používateľ je automaticky presmerovaný na prihlasovaciu stránku.
+Na strane klienta (v Angulari) využívame vlastný súbor \texttt{auth.guard.ts}, ktorý zaisťuje, že k určitým stránkam aplikácie má prístup iba autentifikovaný používateľ. Tento guard je súčasťou smerovania (routing) a overuje, či existuje používateľ v úložisku \texttt{sessionStorage}. Ak nie, používateľ je automaticky presmerovaný na prihlasovaciu stránku.
 
 Okrem toho tento guard podporuje aj kontrolu rolí používateľov. Pomocou atribútu \texttt{expectedEmployeeType} v definícii trasy vieme zabezpečiť, že niektoré stránky (napr. administrátorské) budú dostupné len používateľom s určitou rolou (napr. \texttt{admin}).
 
@@ -1053,14 +1039,14 @@ const routes: Routes = [
 ];
 \end{lstlisting}
 
-Týmto spôsobom zabezpečujeme na klientovi, že sa na súkromné alebo administrátorské stránky dostane iba oprávnený používateľ s platným session údajom, čím zvyšujeme bezpečnosť aplikácie.
+Týmto spôsobom má klient garantované, že sa na súkromné alebo administrátorské stránky dostane iba oprávnený používateľ s platným session údajom, čím zvyšujeme bezpečnosť aplikácie.
 
  
  
 
 \subsection{Prenos a spracovanie dát TODO rozpravat o Server.js a ukazat odtial querynu}
 
-Prenos dát medzi backendom a frontendovou časťou aplikácie zabezpečujú už skôr spomenuté \textbf{servisné triedy}, ktoré využívajú Angularovú službu \texttt{HttpClient} na komunikáciu s REST API.
+Prenos dát medzi backendom a frontendovou časťou aplikácie zaisťujú už skôr spomenuté \textbf{servisné triedy}, ktoré využívajú Angularovú službu \texttt{HttpClient} na komunikáciu s REST API.
  Dáta získané z databázy zvyčajne nevyžadujú ďalšie filtrovanie ani úpravy na strane klienta, pretože sú už v požadovanom formáte.
   Preto volania API endpointov môžeme realizovať priamo a jednoducho pomocou servisných tried, ako napríklad ukazuje nasledujúca metóda na pridanie novej úlohy:
 
@@ -1086,7 +1072,7 @@ Príklad finálnej podoby zadania po úprave je nasledujúci:
 Tento formát umožňuje MathJaxu správne zobrazenie zadania na viacerých riadkoch v aplikácii.
 
 \subsubsection{Generovanie úloh}
-Popri úlohách získavaných priamo z databázy aplikácia implementuje aj dynamické generovanie úloh, ktoré zabezpečuje variabilitu a nepredvídateľnosť obsahu testov. 
+Popri úlohách získavaných priamo z databázy aplikácia implementuje aj dynamické generovanie úloh, vďaka čomu je obsah testov viac variabilný a nepredvidateľný.
 Nižšie uvedená implementácia demonštruje generovanie úloh s použitím binomického rozdelenia:
 
 \begin{lstlisting}[ caption={Ukážka generovania úloh s binomickým rozdelením}, label={lst:binomial-gen}, language=java, style=code-listing ] 
