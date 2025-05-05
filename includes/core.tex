@@ -584,7 +584,7 @@ Percentil poskytuje používateľovi okamžitú informáciu o jeho relatívnom p
 
 
 
-\subsection{Vytváranie a úprava úloh administrátorom TODO: Fotka mozno}
+\subsection{Vytváranie a úprava úloh administrátorom}
 
 V rámci administrátorskej časti aplikácie bola implementovaná funkcionalita umožňujúca správcom systému vytvárať nové úlohy a upravovať existujúce zadania.
  Cieľom tejto funkcionality je umožniť dynamické rozširovanie databázy úloh bez potreby manuálnych zásahov do databázy na úrovni servera.
@@ -597,6 +597,21 @@ V reálnom čase dochádza k ich prekladu do vizuálne čitateľnej podoby, čí
  Matematické výrazy sú zobrazované v editovateľnom textovom poli, ktoré verne imituje klasickú matematickú notáciu, čo výrazne zvyšuje používateľský komfort a presnosť zadávania úloh.
 
 Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zaručuje, že všetky matematické zápisy budú správne interpretované pri zobrazovaní úloh študentom v testoch a materiáloch.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=14cm]{img/edit_ulohy.png}
+  \caption{Ukážka administrátorského rozhrania na úpravu úloh.}
+  \label{fig:admin_edit}
+\end{figure}
+
+Na obrázku \ref{fig:admin_edit} je možné vidieť instantný preklad pomocou knižnice MathQuill pri editovaní úlohy. Používateľ zadáva výraz v LaTeX formáte, ktorý sa okamžite zobrazí vo vykreslenej matematickej forme.
+
+Použitý zápis:
+\begin{lstlisting}[style=code-listing, caption={LaTeX zápis matematického výrazu}, label={fig:admin_edit}]
+  \text{Ak } A, B \text{ sú náhodné udalosti a } P \text{ je pravdepodobnosť, potom platí } P(A \cap B) \leq P(A) + P(B) - P(A \cup B)
+  \end{lstlisting}
+  
 
 \subsection{Export testov a výsledkov}
 
@@ -648,7 +663,7 @@ Na obrázku~\ref{pdf-export} je ukážka časti vygenerovaného PDF dokumentu ob
  
  Týmto príkazom sa automaticky stiahnu všetky knižnice uvedené v súbore \texttt{package.json} a pripravia sa na použitie v projekte.
  
- \subsection{Frontend – Angular TODO: fotka nasej sturktury }
+ \subsection{Frontend – Angular }
 
 Frontendová časť aplikácie bola implementovaná pomocou frameworku \textbf{Angular}, ktorý je postavený na TypeScripte a poskytuje robustnú architektúru pre budovanie komplexných single-page aplikácií (SPA).
  Angular ponúka množstvo výhod ako je komponentovo orientovaný vývoj, dvojcestná väzba dát, modulárnosť a rozsiahla komunita s kvalitnou dokumentáciou.
@@ -693,14 +708,25 @@ ng serve
 Týmto príkazom sa automaticky nainštalujú všetky závislosti zo súboru \texttt{package-lock.json} a vytvorí sa priečinok \texttt{node\_modules}, ktorý obsahuje všetky knižnice potrebné na beh aplikácie.
  Aplikácia je následne dostupná na adrese \texttt{http://localhost:4200}.
 
-Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová štruktúra Angular projektu po vytvorení.
+Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová štruktúra Angular projektu po vytvorení, pričom na obrázku~\ref{fig:project-structure} je zobrazená štruktúra nášho projektu.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{img/angular-structure.png}
-  \caption{Základná štruktúra Angular projektu.}
-  \label{fig:angular-structure}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{img/angular-structure.png}
+    \caption{Základná štruktúra Angular projektu.}
+    \label{fig:angular-structure}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{img/project-structure.png}
+    \caption{Naša štruktúra projektu.}
+    \label{fig:project-structure}
+  \end{minipage}
 \end{figure}
+
 
 \subsubsection{Implementácia grafickej časti}
 Pri implementácii grafického rozhrania webovej aplikácie sme kládli dôraz na jednotný vzhľad, prehľadnosť a používateľskú prívetivosť.
@@ -717,7 +743,7 @@ Ako doplnkovú technológiu sme použili \textbf{node-sass}, čo je nástroj umo
  Tento nástroj podporuje pokročilé \acrshort{css} techniky, ako napríklad vnorenie pravidiel, používanie premenných a mixinov\footnote{Mixiny sú opakovateľné skupiny štýlov v SCSS, ktoré zjednodušujú kód.}, čím je zabezpečené efektívnejšie spravovanie štýlov celej aplikácie.
 
  Zvukové prvky, ktoré dopĺňajú herné mechanizmy gamifikácie, boli integrované prostredníctvom platformy \textbf{Freesound.org}\cite{freesong}, ktorá poskytuje verejne dostupné zvukové efekty.
- \subsubsection{Vizualizácia matematických výrazov pomocou MathJax TODO: FOTO ZE AKO}
+ \subsubsection{Vizualizácia matematických výrazov pomocou MathJax }
  Pre efektívne a presné zobrazovanie matematických zápisov, vzorcov a rovníc sme v aplikácii použili JavaScriptovú knižnicu \textbf{MathJax}. 
  Táto knižnica umožňuje jednoduché vykreslenie matematiky napísanej v LaTeX formáte priamo v \acrshort{html} elementoch pomocou špeciálnej property:
 
@@ -726,6 +752,13 @@ Ako doplnkovú technológiu sme použili \textbf{node-sass}, čo je nástroj umo
   \end{verbatim}
   Takto je možné dynamicky zobrazovať matematický obsah bez potreby ďalších manuálnych zásahov do \acrshort{dom} stromu, 
   pričom MathJax automaticky preloží LaTeX zápis do vizuálne čitateľnej matematickej podoby priamo v prehliadači používateľa.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=13cm]{img/mathjax_priklad.png}
+    \caption{Ukážka zobrazenia matematického výrazu pomocou MathJax.}
+    \label{fig:mathjax-priklad}
+  \end{figure}
 
   \subsubsection{Zadávanie matematických výrazov s MathQuill}
   Administrátorská sekcia aplikácie vyžadovala intuitívny a používateľsky jednoduchý spôsob zadávania matematických výrazov a vzorcov.
@@ -840,13 +873,8 @@ Komponenty s grafmi sa inicializujú až v momente, keď používateľ otvorí p
  
 
 \subsection{Backend}
-
- TODO
- Node
-
- CURL veci
-
- \paragraph{Inštalácia a použitie Express frameworku}
+ Inštalácia a použitie Express frameworku
+ \newline
 
 Inštalácia Expressu je jednoduchá a vykonáva sa pomocou balíčkovacieho nástroja \acrshort{npm} príkazom:
 
@@ -1044,7 +1072,7 @@ Týmto spôsobom má klient garantované, že sa na súkromné alebo administrá
  
  
 
-\subsection{Prenos a spracovanie dát TODO rozpravat o Server.js a ukazat odtial querynu}
+\subsection{Prenos a spracovanie dát}
 
 Prenos dát medzi backendom a frontendovou časťou aplikácie zaisťujú už skôr spomenuté \textbf{servisné triedy}, ktoré využívajú Angularovú službu \texttt{HttpClient} na komunikáciu s REST API.
  Dáta získané z databázy zvyčajne nevyžadujú ďalšie filtrovanie ani úpravy na strane klienta, pretože sú už v požadovanom formáte.
@@ -1070,6 +1098,41 @@ Príklad finálnej podoby zadania po úprave je nasledujúci:
     \end{aligned}
 \end{verbatim}
 Tento formát umožňuje MathJaxu správne zobrazenie zadania na viacerých riadkoch v aplikácii.
+
+Po odoslaní požiadavky na vytvorenie novej úlohy smerom k serveru sa táto spracováva v definovanej API route na strane backendu (v súbore \textit{server.js}). 
+Tu nasleduje overenie požadovaných parametrov, spracovanie voliteľných údajov a vloženie údajov do databázy PostgreSQL pomocou parametrizovaného SQL dotazu.
+\begin{lstlisting}[caption={Serverová logika na spracovanie POST požiadavky pre vytvorenie úlohy}, label={create_exercise}, language=java, style=code-listing]
+  app.post('/admin/exercises', async (req, res) => {
+  try {
+  const { theme_id, difficulty_level, description, points, correct_answer, hints } = req.body;
+  if (!theme_id || !difficulty_level || !description || points === undefined || !correct_answer) {
+  return res.status(400).json({ error: 'Missing required fields' });
+}
+
+const hintsValue = hints ? hints : JSON.stringify([]);
+
+const insertQuery = `
+  INSERT INTO exercises (theme_id, difficulty_level, description, points, correct_answer, hints)
+  VALUES ($1, $2, $3, $4, $5, $6)
+  RETURNING *;
+`;
+const values = [theme_id, difficulty_level, description, points, correct_answer, hintsValue];
+
+const result = await db.query(insertQuery, values);
+res.status(201).json({ exercise: result.rows[0] });
+} catch (error) {
+console.error('Error creating new exercise:', error);
+res.status(500).json({ error: 'Internal Server Error' });
+}
+});
+\end{lstlisting}
+
+Ako je vidieť v ukážke~\ref{create_exercise}, požiadavka na vytvorenie novej úlohy je spracovaná tak, že vstupné dáta sa najprv validujú, následne sa vytvorí SQL dotaz s využitím placeholderov \textit{($1, $2, ...)}, čo prispieva k bezpečnosti voči SQL injection.
+ Pole \textit{hints} je ošetrené ako voliteľné a ak nie je prítomné, do databázy sa vloží prázdne pole v JSON formáte.
+
+Týmto spôsobom sa zabezpečuje, že všetky nové úlohy sú správne štruktúrované a bezchybne vložené do databázy. 
+V prípade úspechu sa späť do klienta odosiela JSON odpoveď s detailmi vytvorenej úlohy.
+
 
 \subsubsection{Generovanie úloh}
 Popri úlohách získavaných priamo z databázy aplikácia implementuje aj dynamické generovanie úloh, vďaka čomu je obsah testov viac variabilný a nepredvidateľný.
@@ -1106,13 +1169,7 @@ n, k a p sú náhodne generované. \item \textbf{Výpočet pravdepodobnosti} —
 Úlohy, ktoré sú dynamicky generované, sú pri volaní API automaticky kombinované s úlohami získanými z databázy.
  Týmto spôsobom vzniká hybridná sada úloh pozostávajúca zo staticky definovaných aj náhodne generovaných položiek, ktorá sa následne zobrazí používateľovi ako jeden komplexný test.
  
- \subsection{DB???? nepaci sa mi toto}
-
- prepajanie
-  PostgreSQL
-  built in mechanica pre data persistance and backps PostgreSQL allows you to specify a data directory where database files are stored, which you can mount as a volume or bind mount in Docker.****
-
-
+ \subsection{Databáza}
   Po úspešnej inštalácii databázového systému PostgreSQL sa môžeme uistiť o správnosti nastavenia spustením interaktívneho príkazu \texttt{psql} v príkazovom riadku.
    Tento príkaz nám otvorí terminál PostgreSQL, v ktorom môžeme zadávať SQL dotazy priamo do databázy.
 
@@ -1240,7 +1297,7 @@ n, k a p sú náhodne generované. \item \textbf{Výpočet pravdepodobnosti} —
         - "5432:5432"
       volumes:
         - ./data:/var/lib/postgresql/data
-        - ./scripts/db:/docker-entrypoint-initdb.d
+        - ./scripts/db:/docker-entrypoint-initdb.d //spustenie skripta na inicializáciu databázy
   \end{lstlisting}
   
   Celý proces zostavenia, inštalácie závislostí a spustenia všetkých kontajnerov zabezpečíme jediným príkazom:
