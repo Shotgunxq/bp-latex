@@ -1099,7 +1099,7 @@ Príklad finálnej podoby zadania po úprave je nasledujúci:
 \end{verbatim}
 Tento formát umožňuje MathJaxu správne zobrazenie zadania na viacerých riadkoch v aplikácii.
 
-Po odoslaní požiadavky na vytvorenie novej úlohy smerom k serveru sa táto spracováva v definovanej API route na strane backendu (v súbore \textit{server.js}). 
+Po odoslaní požiadavky na vytvorenie novej úlohy smerom k serveru sa táto požiadavka spracováva v definovanej API route na strane backendu (v súbore \textit{server.js}). 
 Tu nasleduje overenie požadovaných parametrov, spracovanie voliteľných údajov a vloženie údajov do databázy PostgreSQL pomocou parametrizovaného SQL dotazu.
 \begin{lstlisting}[caption={Serverová logika na spracovanie POST požiadavky pre vytvorenie úlohy}, label={create_exercise}, language=java, style=code-listing]
   app.post('/admin/exercises', async (req, res) => {
@@ -1131,7 +1131,7 @@ Ako je vidieť v ukážke~\ref{create_exercise}, požiadavka na vytvorenie novej
  Pole \textit{hints} je ošetrené ako voliteľné a ak nie je prítomné, do databázy sa vloží prázdne pole v JSON formáte.
 
 Týmto spôsobom sa zabezpečuje, že všetky nové úlohy sú správne štruktúrované a bezchybne vložené do databázy. 
-V prípade úspechu sa späť do klienta odosiela JSON odpoveď s detailmi vytvorenej úlohy.
+V prípade úspechu sa späť na klienta odosiela JSON odpoveď s detailmi vytvorenej úlohy.
 
 
 \subsubsection{Generovanie úloh}
@@ -1311,3 +1311,11 @@ n, k a p sú náhodne generované. \item \textbf{Výpočet pravdepodobnosti} —
 
 
   \section{Testovanie}
+  Dôležitou súčasťou vývoja webovej aplikácie bolo používateľské testovanie, ktoré malo za cieľ získať spätnú väzbu o používateľskom rozhraní a celkovom používateľskom zážitku (\acrshort{ux}). 
+  Počas tohto testovania bola aplikácia poskytnutá väčšiemu počtu používateľov, ktorí sa následne vyjadrili k jej funkčnosti, prehľadnosti a intuitívnosti jednotlivých prvkov.
+
+Získaná spätná väzba bola prevažne pozitívna a potvrdila, že aplikácia dobre napĺňa svoj cieľ poskytovať intuitívne a interaktívne prostredie pre výučbu matematickej štatistiky a pravdepodobnosti. 
+Objavili sa však aj pripomienky a návrhy, ktoré sa týkali určitých detailov používateľského prostredia a jeho ovládania. 
+Tieto pripomienky sme dôsledne zohľadnili a implementovali sme viaceré úpravy a zlepšenia, vďaka ktorým sa zvýšila celková prehľadnosť, zrozumiteľnosť a jednoduchosť ovládania aplikácie.
+
+Práve vďaka tejto spätnej väzbe sa nám podarilo ešte viac zlepšiť používateľskú skúsenosť a celkovú kvalitu výsledného produktu.
