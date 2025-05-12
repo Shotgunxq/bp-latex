@@ -534,7 +534,7 @@ Pri návrhu aplikácie sme sa rozhodli implementovať mechanizmus \textbf{automa
 Takto generované úlohy pridávajú do testovania prvok náhodnosti a prekvapenia, čím dochádza k efektívnejšiemu prevereniu skutočných vedomostí a schopností študenta.
 Generátor úloh je navrhnutý tak, aby dynamicky vytváral nové zadania založené na vybraných pravdepodobnostných rozdeleniach. V súčasnej verzii aplikácie podporujeme generovanie úloh z nasledujúcich rozdelení:
 
-\begin{itemize} \item \textbf{Binomické rozdelenie} \item \textbf{Geometrické rozdelenie} \item \textbf{Hypergeometrické rozdelenie} \end{itemize}
+\begin{itemize} \item \textbf{Binomické rozdelenie} \item \textbf{Geometrické rozdelenie} \item \textbf{Hypergeometrické rozdelenie} \item \textbf{Poissnovo rozdelenie} \item \textbf{Rovnomerné rozdelenie} \end{itemize}
 
 Každá vygenerovaná úloha je unikátna, pričom vstupné parametre ako počet pokusov, počet úspechov alebo pravdepodobnosť úspechu sú generované náhodne v definovanom rozsahu.
 \subsection{Materiály}
@@ -608,7 +608,7 @@ Táto funkcionalita nielen zjednodušuje proces tvorby úloh, ale zároveň zaru
 Na obrázku \ref{fig:admin_edit} je možné vidieť instantný preklad pomocou knižnice MathQuill pri editovaní úlohy. Používateľ zadáva výraz v LaTeX formáte, ktorý sa okamžite zobrazí vo vykreslenej matematickej forme.
 
 Použitý zápis:
-\begin{lstlisting}[style=code-listing, caption={LaTeX zápis matematického výrazu}, label={fig:admin_edit}]
+\begin{lstlisting}[style=code-listing, caption={LaTeX zápis matematického výrazu}]
   \text{Ak } A, B \text{ sú náhodné udalosti a } P \text{ je pravdepodobnosť, potom platí } P(A \cap B) \leq P(A) + P(B) - P(A \cup B)
   \end{lstlisting}
   
