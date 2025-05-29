@@ -779,6 +779,19 @@
     \listofpriloh
 }
 
+
+\newcommand\FEIaiDeclaration[1]{
+    \IfEqCase*{\FEIenglish}{
+        {0}{\def\@aiDeclaration{Použitie nástrojov umelej inteligencie}}
+        {1}{\def\@aiDeclaration{Usage of artificial intelligence tools}}
+        }[]
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\@aiDeclaration}
+    \subsection*{\@aiDeclaration}
+    \input{#1}\par
+}
+
+
 \newcommand\FEIappendix[2]{ 
     \newpage
     \cleardoublepage    
