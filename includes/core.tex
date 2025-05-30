@@ -135,13 +135,13 @@ Backend predstavuje časť softvérovej aplikácie, ktorá nie je priamo prístu
  \subsubsection{API}
  \acrfull{api} je rozhranie, ktoré slúži na komunikáciu jednej aplikácie s inou aplikáciou alebo systémom.
  Umožňuje vývojárom využívať už existujúce funkcionality bez toho, aby ich museli znova vytvárať, čím urýchľuje a simplifikuje tak vývoj softvéru.
-  \acrshort{api} definuje spôsob výmeny dát medzi klientom a serverom – napríklad keď mobilná aplikácia zobrazuje údaje o počasí získané zo servera.\cite{api}
+  \acrshort{api} definuje spôsob výmeny dát medzi klientom a serverom. \cite{api}
  \subsubsection{REST}
- \acrshort{rest} \acrshort{api} (\acrfull{rest} \acrfull{api}) je typ webového \acrshort{api}, vďaka ktorému môžu medzi sebou aplikácie komunikovať pomocou štandardných \acrshort{http} protokolov. 
+ \acrshort{rest} \acrshort{api} \acrfull{rest} \acrfull{api} je typ webového \acrshort{api}, vďaka ktorému môžu medzi sebou aplikácie komunikovať pomocou štandardných \acrshort{http} protokolov. 
  REST API využíva jednoduché operácie ako čítanie, zápis, úprava a mazanie dát prostredníctvom \acrshort{url} adries a HTTP metód.
 
 Jeho výhodou je jednoduchá štruktúra, škálovateľnosť a nezávislosť medzi klientom a serverom – klient nemusí poznať vnútornú logiku servera a server nemusí vedieť nič o klientskom rozhraní.
- REST API je široko používané pri vývoji moderných webových a mobilných aplikácií, pretože zabezpečuje flexibilnú a efektívnu výmenu dát.
+ REST API je široko používané pri vývoji moderných webových a mobilných aplikácií, pretože zabezpečuje flexibilnú a efektívnu výmenu dát.\cite{rest}
 \subsubsection{CORS}
 CORS (Cross-Origin Resource Sharing) predstavuje mechanizmus, ktorý umožňuje realizáciu HTTP požiadaviek medzi rôznymi doménami (tzv. cross-origin požiadavky).
  Ide o spôsob, akým môžu prehliadače bezpečne vykonávať požiadavky na zdroje umiestnené na iných serveroch, než odkiaľ pochádza pôvodná webová stránka. 
@@ -242,11 +242,7 @@ Umožňuje tímovú spoluprácu v reálnom čase prostredníctvom webového preh
  Poskytuje predpripravené a prispôsobiteľné komponenty, ako sú tlačidlá, formuláre, tabuľky či navigačné panely, a tak dokážu vývojári rýchlo vytvárať moderné, responzívne a esteticky príjemné používateľské rozhrania.
   Angular Material UI podporuje integráciu s Angular frameworkom a zabezpečuje konzistentný dizajn a vysokú úroveň použiteľnosti v rámci aplikácií. \cite{materialUI}
 
-\subsection{Gamifikácia}
-Gamifikácia je aplikácia herných prvkov a princípov v neherných kontextoch s cieľom zvýšiť angažovanosť a motiváciu jednotlivcov pri vykonávaní určitých aktivít.
- Tento prístup sa využíva v rôznych oblastiach, ako sú vzdelávanie, marketing, podnikanie a osobný rozvoj.
-Vo vzdelávacom prostredí to znamená implementáciu mechanizmov, ako sú zbieranie bodov, získavanie odmien, porovnávanie sa s ostatnými či postupovanie na vyššie úrovne, aby sa proces učenia stal interaktívnejším a pútavejším. 
-\subsubsection{Gamifikácia v e-learningu}
+\subsection{Gamifikácia v e-learningu}
 Gamifikácia v e-learningu zahŕňa integráciu herných prvkov, ako sú body, odznaky, rebríčky a úrovne, do vzdelávacích online prostredí s cieľom zvýšiť motiváciu a angažovanosť študentov.
  Podľa príspevku v zborníku z medzinárodnej vedeckej konferencie "Vzdělávání dospělých 2021" \cite{gamifikacia} je gamifikácia efektívnym nástrojom na podporu aktívneho učenia, pretože využíva prirodzenú ľudskú tendenciu k hre a súťaživosti.
   Implementácia herných mechanizmov v e-learningových kurzoch môže viesť k zlepšeniu zapojenia študentov, zvýšeniu ich motivácie a následne k lepším vzdelávacím výsledkom.
@@ -815,33 +811,39 @@ Grafy, ktoré táto knižnica poskytuje, sú moderné, responzívne a ľahko imp
  \begin{verbatim} npm install apexcharts ng-apexcharts \end{verbatim}
  
  Po úspešnej inštalácii balíkov je možné vytvoriť požadované grafy priamo v komponente aplikácie. 
- Ako konkrétny príklad uvádzame vizualizáciu hustoty pravdepodobnosti \textbf{Studentovho rozdelenia}, ktorého implementáciu máme zahrnutú aj vo vizuálnej časti tejto práce (viď obrázok č.~\ref{grafy}).
+ Ako konkrétny príklad uvádzame vizualizáciu hustoty pravdepodobnosti \textbf{Chí-kvadrát rozdelenia}, ktorého implementáciu máme zahrnutú aj vo vizuálnej časti tejto práce (viď obrázok č.~\ref{grafy}).
  
- Výpočet jednotlivých bodov pre vykreslenie Studentovho rozdelenia realizujeme nasledovnou metódou:
+ Výpočet jednotlivých bodov pre vykreslenie Chí-kvadrát rozdelenia realizujeme nasledovnou metódou:
  
- \begin{lstlisting}[ caption={Výpočet bodov Studentovho rozdelenia}, label={lst:student-distribution}, language=java, style=code-listing ] 
-  calculateTDistribution(degreesOfFreedom: number): 
-  { x: number; y: number }[] { 
-    const gamma = (z: number): number => { 
-    if (z === 1) return 1; if (z === 0.5) return Math.sqrt(Math.PI);
-     return (z - 1) * gamma(z - 1); 
+ \begin{lstlisting}[ caption={Výpočet bodov Chí-kvadrát rozdelenia}, label={lst:chikvadrat-distribution}, language=java, style=code-listing ] 
+  calculateChiSquared(degreesOfFreedom: number): { x: number; y: number }[] {
+    const gamma = (z: number): number => {
+      if (z === 1) return 1;
+      if (z === 0.5) return Math.sqrt(Math.PI);
+      return (z - 1) * gamma(z - 1);
     };
- 
- const tPDF = (t: number, df: number): number => { 
-  const numerator = gamma((df + 1) / 2);
-  const denominator = Math.sqrt(df * Math.PI) * gamma(df / 2); 
-  return (numerator / denominator) * Math.pow(1 + (t * t) / df, -(df + 1) / 2); 
-  };
- 
- const tData = []; const range = 4; const step = 0.1;
- 
- for (let t = -range; t <= range; t += step) { 
-  const x = parseFloat(t.toFixed(1));
-  const y = parseFloat(tPDF(t, degreesOfFreedom).toFixed(4));
-  tData.push({ x, y }); 
-  }
- 
- return tData; } 
+
+    const chiPDF = (x: number, df: number): number => {
+      if (x <= 0) return 0;
+      const k = df / 2;
+      const numerator = Math.pow(x, k - 1) * Math.exp(-x / 2);
+      const denominator = Math.pow(2, k) * gamma(k);
+      return numerator / denominator;
+    };
+
+    const chiData = [];
+    const maxRange = 20;
+    const step = 0.1;
+
+    for (let x = 0; x <= maxRange; x += step) {
+      chiData.push({
+        x: parseFloat(x.toFixed(1)),
+        y: parseFloat(chiPDF(x, degreesOfFreedom).toFixed(4)),
+      });
+    }
+
+    return chiData;
+  } 
 
 \end{lstlisting}
 
@@ -850,12 +852,12 @@ Takto pripravené dáta sú následne vizualizované pomocou komponentu \texttt{
 \begin{lstlisting}[ caption={Vykreslenie grafu v šablóne pomocou ApexCharts}, label={lst:apexchart-usage}, language=HTML, style=code-listing ]
   
   <apx-chart 
-   [series]="tChartOptions.series || []" 
-   [chart]="tChartOptions.chart || { type: 'line' }" 
-   [xaxis]="tChartOptions.xaxis || {}" 
-   [yaxis]="tChartOptions.yaxis || {}" 
-   [markers]="tChartOptions.markers || {}" 
-   [annotations]="tChartOptions.annotations || {}"> 
+   [series]="chiChartOptions.series || []" 
+   [chart]="chiChartOptions.chart || { type: 'line' }" 
+   [xaxis]="chiChartOptions.xaxis || {}" 
+   [yaxis]="chiChartOptions.yaxis || {}" 
+   [markers]="chiChartOptions.markers || {}" 
+   [annotations]="chiChartOptions.annotations || {}"> 
    </apx-chart> 
 
   \end{lstlisting}
@@ -1132,27 +1134,39 @@ V prípade úspechu sa späť na klienta odosiela JSON odpoveď s detailmi vytvo
 \subsubsection{Generovanie úloh}
 Z databázy, ktorú sme naplnili úlohami prevzatými z nasledujúcich literatúrnych zdrojov \cite{nanasiova} \cite{volauf}, aplikácia získava úlohy priamo, no zároveň implementuje aj dynamické generovanie úloh. Táto vlastnosť umožňuje, aby bol obsah testov variabilnejší a menej predvídateľný. Nižšie uvedená implementácia demonštruje generovanie úloh s využitím binomického rozdelenia:
 
-\begin{lstlisting}[ caption={Ukážka generovania úloh s binomickým rozdelením}, label={lst:binomial-gen}, language=java, style=code-listing ] 
-  export function binomialProbabilityRandom(): binomialExercise[] { 
-    const exercises: binomialExercise[] = [];
+\begin{lstlisting}[caption={Ukážka generovania úloh s binomickým rozdelením}, label={lst:binomial-gen}, language=java, style=code-listing]
+function generateBinomialExercises():
+  exercises = []
+  numberOfExercises = predefined number
 
-for (let i = 0; i < 1; i++) {
-   const n = Math.floor(Math.random() * 10) + 3; const k = Math.floor(Math.random() * (n + 1)) + 2; const p = Math.round(Math.random() * 100) / 100;
-   const probability = calculateProbability(n, k, p);
-const description = generateDescription(n, k, p);
-const correct_answer = calculateAnswer(n, k, p);
-const hints = [
-  `Pravdepodobnosť úspechu je ${p}.`,
-  `Počet pokusov je ${n}.`,
-  `Počet úspechov je ${k}.`
-];
+  for each exercise in numberOfExercises:
+    n = random integer 
+    k = random integer 
+    p = random float 
 
-exercises.push({ n, k, p, probability, description, correct_answer, points: 3, hints });
-}
-return exercises; 
-} 
+    probability = calculateBinomialProbability(n, k, p)
+    description = "\\begin{aligned}
+      &\\text{Softvérový tester vykonáva }" + n + "\\text{ automatizovaných testov.} \\\\
+      &\\text{Pravdepodobnosť úspechu jedného testu je }" + p + "\\text{.} \\\\
+      &\\text{Aká je pravdepodobnosť, že } X = " + k + "\\text{?}
+    \\end{aligned}"
 
+    hints = [
+      "Uloha sa riadi binomickym rozdelenim...",
+      "Pouzi vzorec: C(n, k) * p^k * (1 - p)^(n - k).",
+      "Dosad n, k a p. Zaokruhli na 3 des. miesta."
+    ]
+
+    exercises.append({ n, k, p, probability, description, correct_answer: probability, points: 3, hints })
+
+  return exercises
+
+function calculateBinomialProbability(n, k, p):
+  combination = factorial(n) / (factorial(k) * factorial(n - k))
+  probability = combination * p^k * (1 - p)^(n - k)
+  return round(probability, 3)
 \end{lstlisting}
+
 
 Hlavné časti implementácie sú nasledovné:
 
