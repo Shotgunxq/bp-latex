@@ -599,8 +599,10 @@ Na obrázku \ref{fig:admin_edit} je možné vidieť instantný preklad pomocou k
 
 Použitý zápis:
 \begin{lstlisting}[style=code-listing, caption={LaTeX zápis matematického výrazu}]
-  \text{Ak } A, B \text{ sú náhodné udalosti a } P \text{ je pravdepodobnosť, potom platí } P(A \cap B) \leq P(A) + P(B) - P(A \cup B)
-  \end{lstlisting}
+\begin{aligned}
+    & \text{Nech }X\sim N(4,1). \text{Nájdite }a\text{ tak, že }P(2X+1\le a)=0.9. \\
+    & \textbf{Odpoveď zapíšte ako desatinné číslo zaokrúhlené na štyri desatinné miesta.}
+    \end{aligned}  \end{lstlisting}
   
 
 \subsection{Export testov a výsledkov}
@@ -692,11 +694,11 @@ ng new angular-app
 Tento príkaz vygeneruje základnú adresárovú štruktúru aplikácie, vrátane konfiguračných súborov, ako je napríklad \texttt{angular.json}, \texttt{package.json}, a priečinkov \texttt{src/}, \texttt{app/} a ďalších. Po úspešnom vytvorení projektu môžeme aplikáciu spustiť príkazom:
 
 \begin{verbatim}
-ng serve
+ng serve --port 80
 \end{verbatim}
 
 Týmto príkazom sa automaticky nainštalujú všetky závislosti zo súboru \texttt{package-lock.json} a vytvorí sa priečinok \texttt{node\_modules}, ktorý obsahuje všetky knižnice potrebné na beh aplikácie.
- Aplikácia je následne dostupná na adrese \texttt{http://localhost:4200}.
+ Aplikácia je následne dostupná na adrese \texttt{http://localhost:80}.
 
 Na obrázku~\ref{fig:angular-structure} je znázornená základná adresárová štruktúra Angular projektu po vytvorení, pričom na obrázku~\ref{fig:project-structure} je zobrazená štruktúra nášho projektu.
 
