@@ -270,8 +270,10 @@ Git je distribuovaný systém slúžiaci na správu verzií, ktorým sa dajú sl
 Je open-source, bezplatný a vďaka svojim vlastnostiam sa stal štandardom v oblasti verzionovania kódu.\cite{git}
 
 \section{Návrh webovej aplikácie}
-Naša webová aplikácia, koncipovaná ako dvojvrstvový systém, pozostáva z časti  backendovej - vytvorenej pomocou platformy Express - a frontendovej - implementovanej pomocou frameworku Angular.
+Naša webová aplikácia je koncipovaná ako systém s trojvrstvovou architektúrou, ktorá pozostáva z prezentačnej, logickej a dátovej vrstvy. 
+Prezentačnú vrstvu (frontend) sme implementovali pomocou frameworku Angular, zatiaľ čo logickú vrstvu (backend) sme vytvorili pomocou platformy Express. 
 Fakt, že sme obidve časti navrhnli ako samostatné a na sebe nezávislé aplikácie, nám v procese vytvárania umožnil väčšiu flexibilitu nielen v oblasti samotného vývoja, ale aj testovania či nasadzovania aplikácie na server.
+Dátovú vrstvu tvorí databázový systém PostgreSQL, ktorý zaisťuje ukladanie a efektívne spracovanie dát celej aplikácie.
 
 Ako sme už spomenuli v predchádzajúcich kapitolách, backendová časť je zodpovedná za spracovanie údajov, manipuláciu s databázou, \acrshort{ldap} autentifikáciu používateľov a spracovanie požiadaviek zo strany klienta. Ide o akúsi integračnú vrstvu medzi používateľským rozhraním a databázou, ktorá zabezpečuje bezpečný a efektívny prenos údajov. 
 
@@ -431,7 +433,7 @@ Základná štruktúra dizajnu bola vytvorená v nástroji Figma, ktorý poskyto
 
 Ako môžeme vidieť na obrázku č.~\ref{homescreen}, ide o hlavnú obrazovku aplikácie, ktorá slúži ako východiskový bod pre všetky hlavné činnosti používateľa.
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \includegraphics[width=16cm]{img/homepage.png}
   \caption{Hlavná obrazovka aplikácie.}
