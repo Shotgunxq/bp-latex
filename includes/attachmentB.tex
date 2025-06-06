@@ -1,51 +1,92 @@
-K úspešnému spusteniu webovej aplikácie je potrebné mať na vašom zariadení nainštalované nasledujúce:
+Upozornenie: Tento návod na inštaláciu je platný výlučne pre operačný systém \textbf{Windows}. Postupy pre iné operačné systémy sa môžu líšiť.
+
+Na úspešné spustenie webovej aplikácie je potrebné mať na vašom zariadení nainštalované nasledujúce komponenty:
 
 \begin{itemize}
-    \item \textbf{Windows Subsystem for Linux}
+    \item \textbf{Windows Subsystem for Linux (WSL)}
 
-    Inštalácia prebieha pomocou Windows PowerShell, kde je potrebné zadať príkaz:
+    Oficiálny návod k inštalácii je dostupný na stránke:
+    \url{https://learn.microsoft.com/en-us/windows/wsl/install}
+
+    Otvorte Windows PowerShell pomocou klávesovej skratky \textbf{Windows Key + X}, ktorá otvorí menu. Kliknite na položku \textbf{Windows PowerShell}, čím otvoríte okno PowerShellu.
+
+    V PowerShell zadajte príkaz na inštaláciu:
     \begin{verbatim}
     wsl --install
     \end{verbatim}
-    Po automatickej inštalácii bude potrebné vytvoriť si lokálne konto pre tento subsystém. Pokračujte podľa pokynov inštalátora.
+
+    Po dokončení automatickej inštalácie si vytvoríte lokálne konto pre subsystém podľa zobrazených pokynov.
 
     \item \textbf{Docker Desktop}
 
-    Na inštaláciu Docker Desktop je potrebné stiahnuť inštalátor zo stránky \url{https://docs.docker.com/}. Po spustení inštalátora sa Docker automaticky nainštaluje. Ďalej pokračujte podľa pokynov inštalátora.
+    Oficiálny návod na inštaláciu je dostupný na:
+    \url{https://docs.docker.com/desktop/setup/install/windows-install/}
 
-    \item \textbf{Git}
+    Stiahnite inštalátor zo stránky:
+    \url{https://docs.docker.com/}
 
-    Zdrojový kód je dostupný na GitHub adrese: \url{https://github.com/Shotgunxq/bp} a taktiež medzi prílohami tejto práce.
+    Po spustení inštalátora postupujte podľa pokynov. Docker Desktop sa nainštaluje automaticky.
 
-    Git inštalátor si môžeme stiahnuť cez webovú stránku: \url{https://git-scm.com/downloads}
+    \item \textbf{Git (voliteľné)}
 
-    Po spustení inštalátora sa Git automaticky nainštaluje.
+    Git je potrebný iba v prípade, že chcete zdrojový kód stiahnuť priamo z GitHubu. Ak využijete priložené súbory, Git nemusíte inštalovať.
+
+    Inštalátor je dostupný na stránke:
+    \url{https://git-scm.com/downloads}
+
+    Po stiahnutí a spustení inštalátora postupujte podľa jeho pokynov.
 \end{itemize}
 
-Po nainštalovaní Gitu môžeme skopírovať zdrojový kód webovej aplikácie na naše zariadenie cez PowerShell pomocou príkazu:
+\subsection*{Získanie zdrojového kódu}
+
+Zdrojový kód aplikácie môžete získať dvoma spôsobmi:
+
+\begin{enumerate}
+    \item \textbf{Zo súboru priloženého k práci (odporúčané)}
+
+    Ak používate súbor priložený k práci, je potrebné ho najskôr rozbaliť. Kliknite pravým tlačidlom myši na stiahnutý \texttt{.zip} súbor a vyberte možnosť \textbf{Extract All} (alebo \textbf{Extrahovať všetko}). Po rozbalení získate priečinok s aplikáciou.
+
+    \item \textbf{Priamo z GitHubu}
+
+    Ak využívate tento spôsob, najskôr si nainštalujte Git podľa pokynov vyššie.
+
+    Potom otvorte PowerShell (\textbf{Windows Key + X}, položka \textbf{Windows PowerShell}) a stiahnite zdrojový kód príkazom:
+
+    \begin{verbatim}
+    git clone https://github.com/Shotgunxq/bp
+    \end{verbatim}
+\end{enumerate}
+
+\subsection*{Spustenie aplikácie}
+
+Bez ohľadu na spôsob získania zdrojového kódu pokračujte nasledovne:
+
+Otvorte PowerShell (\textbf{Windows Key + X}, položka \textbf{Windows PowerShell}) a presuňte sa do priečinka aplikácie príkazom:
+
 \begin{verbatim}
-git clone https://github.com/Shotgunxq/bp
+cd cesta\k\vasemu\priecinku\bp
 \end{verbatim}
 
-Po skopírovaní navigujte do tohto priečinka v PowerShell pomocou príkazu:
-\begin{verbatim}
-cd bp
-\end{verbatim}
+Cestu (\texttt{cesta\textbackslash k\textbackslash vasemu\textbackslash priecinku}) nahraďte úplnou cestou k priečinku, do ktorého ste aplikáciu rozbalili alebo stiahli.
 
-Zbuildujte aplikáciu pomocou príkazu:
+Zbuildujte aplikáciu príkazom:
+
 \begin{verbatim}
 docker compose build
 \end{verbatim}
-Počkajte, kým sa vytvoria Docker kontajnery, ktoré potom následne uvidíte v PowerShell alebo v Docker Desktop medzi \textit{Containers}.
 
-Po úspešnom builde môžete spustiť aplikáciu pomocou príkazu:
+Počkajte na dokončenie procesu. Docker kontajnery budú viditeľné v PowerShell alebo v Docker Desktop v sekcii \textit{Containers}. V tejto sekcii sa vám zobrazí tabuľka so zoznamom kontajnerov. V stĺpci \textbf{Action} kliknite na tlačidlo \textbf{Start}, aby ste kontajnery spustili manuálne.
+
+Alternatívne môžete spustiť aplikáciu priamo z PowerShellu pomocou príkazu:
+
 \begin{verbatim}
 docker compose up
 \end{verbatim}
 
-Aplikácia sa následne automaticky spustí. Databáza sa vytvorí spolu s databázovou schémou a hotovými dátami automaticky.
+Aplikácia automaticky vytvorí databázu, schému a importuje dáta.
 
-Aplikácia bude dostupná na adrese:
+Aplikácia bude dostupná vo vašom webovom prehliadači na adrese:
+
 \begin{verbatim}
 http://localhost/
 \end{verbatim}
